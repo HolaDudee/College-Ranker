@@ -3,7 +3,7 @@ import {} from 'expo';
 <StatusBar style="dark" />
 import React, { Component, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ImageBackground, TouchableHighlight, Alert, Dimensions, SafeAreaView } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ImageBackground, TouchableOpacity, Alert, Dimensions, SafeAreaView } from 'react-native';
 import Constants from 'expo-constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  ///  npx expo start  ///
 ////////////////////////
 
-let hamMenuPic = 'https://holadudee.github.io/52aa55ce2afd860ab4dd5b05ed4c7abf.png';
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceHeightPart = deviceHeight/24;
@@ -21,7 +20,7 @@ let ff = "Avenir";
 let color = "red";
 let selectColor = "red";
 
-let taskbarHeight = deviceHeightPart*2.2;
+let taskbarHeight = deviceHeightPart*1.5;
 let iconWidth = taskbarHeight;
 let iconBackgroundWidth = iconWidth*1.2;
 let iconBackgroundHeight = taskbarHeight*1.2;
@@ -111,9 +110,10 @@ export default function App() {
   const [openMenu, setOpenMenu] = useState(false);
   const [valueMenu, setValueMenu] = useState('home')
   const [itemsMenu, setItemsMenu] = useState([
-    {label: 'Home', value: 'home'},
-    {label: 'My Colleges', value: 'myColleges'},
-    {label: 'Settings', value: 'settings'},
+    {label: 'Home', value: 'home', icon: () => <Image source={require('./assets/img/homeIconV2White.png')} style={{height: 25, width: 25}} />},
+    
+    {label: 'My Colleges', value: 'myColleges', icon: () => <Image source={require('./assets/img/collegeIconWhite.png')} style={{height: 25, width: 25}} />},
+    {label: 'Settings', value: 'settings', icon: () => <Image source={require('./assets/img/settingsGearWheelWhite.png')} style={{height: 25, width: 25}} />},
   ]);
   
 
@@ -124,8 +124,8 @@ export default function App() {
         <SafeAreaView>
         
         <View style={styles.topMargin}>
-          <Text style={{fontSize: 24, fontFamily: ff, marginTop: 0, fontWeight: 'bold', color: '#3A3B3C'}}>College Ranker</Text>
-            <View style={styles.topTaskbar}>
+          <Text style={{fontSize: 24, fontFamily: ff, marginBottom: 0, fontWeight: 'bold', color: '#3A3B3C'}}>College Ranker</Text>
+            {/*<View style={styles.topTaskbar}>
               <DropDownPicker
                 open = {open}
                 value = {value}
@@ -140,9 +140,9 @@ export default function App() {
                 searchable = {true}
                 mode = "BADGE"
 
-                style={{ width: deviceWidth/2, height: taskbarHeight, position: 'absolute', left: 0, top: 0, margin: 5}}/>
-            </View>
-          <View style={{position: 'absolute', top: -deviceHeightPart*3, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
+                style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: 0, margin: 5}}/>
+            </View>*/}
+          {/*<View style={{position: 'absolute', top: -deviceHeightPart*3, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
             <DropDownPicker
             open={openMenu}
             value={valueMenu}
@@ -152,40 +152,62 @@ export default function App() {
             setItems={setItemsMenu}
             
             closeAfterSelecting={true}
+            textStyle={{fontSize: 30}}
             theme='DARK'
             mode='BADGE'
             listMode='MODAL'
             modalAnimationType="slide"
             style={{height: 0,width: 0,opacity: 0,position: 'absolute',top: 0, left: 0}}
           />
+            <View style={{backgroundColor: '#62b4cf', position: 'absolute', top: deviceHeightPart*4, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
+            <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*4, right: 0, margin: 5, marginTop: 10}}>
+              <Image source={require('./assets/img/hamburgerMenuIcon.png')} style={{height: taskbarHeight, width: iconWidth}}/>
+            </TouchableOpacity>
+          </View>*/} 
 
-            <TouchableHighlight onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeight/4}}>
-              <Image uri={hamMenuPic} style={{height: 25, width: 25}}/>
-            </TouchableHighlight>
-          </View>
         </View>
 
           <View style={styles.pages}>
             <View>{valueMenu=='settings' ? (<>
 
-              <Image uri={'https://github.com/HolaDudee/collegeRanker/blob/main/assets/img/settingsGearWheel.png?raw=true'} style={{height: 100, width: 100, position: 'absolute', top: deviceHeight/4}} />
+              <Image source={require('./assets/img/settingsGearWheel.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4 }} />
               
+              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
+                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
+              </View>
+
+              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
+                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
+              </View>
+
+              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
+                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
+              </View>
+
+              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
+                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
+              </View>
               
+
 
             </>) : null}</View>
 
             <View>{valueMenu=='myColleges' ? (<>
 
-              <Image uri={'https://github.com/HolaDudee/collegeRanker/blob/main/assets/img/collegeIcon.png?raw=true'} style={{height: 100, width: 100, position: 'absolute', top: deviceHeight/4}} />
+              <Image source={require('./assets/img/collegeIcon.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />
               
               
             </>) : null}</View>
 
             <View>{valueMenu=='home' ? (<>
-              {/*<TouchableHighlight onPress={this.addCollege} style={{width: deviceWidth/2+5}}>
+              {/*<TouchableOpacity onPress={this.addCollege} style={{width: deviceWidth/2+5}}>
                 <View style={{backgroundColor: 'lightblue', height: deviceHeightPart, justifyContent: 'center', width: deviceWidth/2, borderRadius: 15, marginLeft: 5}}><Text>Add New College</Text></View>
-              </TouchableHighlight>*/}
-              <Image uri={'https://github.com/HolaDudee/collegeRanker/blob/main/assets/img/homeIconV2.png?raw=true'} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />
+              </TouchableOpacity>*/} 
+              <Image source={require('./assets/img/homeIconV2.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />
               
               
             </>) : null}</View>
@@ -217,6 +239,47 @@ export default function App() {
             </>) : null}</View>
           
           </View>
+
+          <View style={styles.topTaskbar}>
+            <DropDownPicker
+              open = {open}
+              value = {value}
+              items = {items}
+              setOpen = {setOpen}
+              setValue = {setValue}
+              setItems = {setItems}
+
+              closeAfterSelecting = {true}
+              showBadgeDot = {false}
+              theme = "DARK"
+              searchable = {true}
+              mode = "BADGE"
+
+              style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: -deviceHeightPart*5.35, margin: 5}}/>
+          </View>
+
+          <View style={{position: 'absolute', top: -deviceHeightPart*1.5, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
+            <DropDownPicker
+            open={openMenu}
+            value={valueMenu}
+            items={itemsMenu}
+            setOpen={setOpenMenu}
+            setValue={setValueMenu}
+            setItems={setItemsMenu}
+            
+            closeAfterSelecting={true}
+            textStyle={{fontSize: 30}}
+            theme='DARK'
+            mode='BADGE'
+            listMode='MODAL'
+            modalAnimationType="slide"
+            style={{height: 0,width: 0,opacity: 0,position: 'absolute',top: 0, left: 0}}
+          />
+            <View style={{backgroundColor: '#62b4cf', position: 'absolute', top: deviceHeightPart*4, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
+            <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*4, right: 0, margin: 5, marginTop: 10}}>
+              <Image source={require('./assets/img/hamburgerMenuIcon.png')} style={{height: taskbarHeight, width: iconWidth}}/>
+            </TouchableOpacity>
+          </View>
         </SafeAreaView>
       </View>
     </SafeAreaProvider>
@@ -240,18 +303,18 @@ const styles = StyleSheet.create({
   },
   pages: {
     // flex: 9,
-    alignItems: 'left', //WHAT???
+    // alignItems: 'left', //WHAT???
     // justifyContent: 'center',
     textAlign: 'center',
   },
   topMargin: {
     backgroundColor: color,
-    height: deviceHeightPart*2,
+    height: 34,
     width: deviceWidth,
     position: 'relative',
     left: 0,
     top: 0,
-    justifyContent: 'center',
+    justifyContent: 'bottom',
     alignItems: 'center',
     fontSize: 24,
     borderRadius: 2,
