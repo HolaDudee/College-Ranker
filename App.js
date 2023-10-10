@@ -3,7 +3,7 @@ import {} from 'expo';
 <StatusBar style="dark" />
 import React, { Component, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ImageBackground, TouchableOpacity, Alert, Dimensions, SafeAreaView } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ImageBackground, TouchableOpacity, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,7 +18,7 @@ let deviceHeightPart = deviceHeight/24;
 let deviceWidth = Dimensions.get('window').width;
 let ff = "Avenir";
 let color = "red";
-let selectColor = "red";
+let settingsBackgroundColor = '#fb6767';
 
 let taskbarHeight = deviceHeightPart*1.5;
 let iconWidth = taskbarHeight;
@@ -94,6 +94,21 @@ export default function App() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  setOpenBypass = () => {
+    if (valueMenu=='home'){
+      if (open==true){
+        setOpen(false)
+      }
+      else{
+        setOpen(true)
+      }
+    }
+    else{
+      setValueMenu('home')
+      setOpen(true)
+    }
+  };
+
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('select')
   const [items, setItems] = useState([
@@ -129,6 +144,118 @@ export default function App() {
     {label: '10', value: '10'},
   ]);
 
+  const [openS2, setOpenS2] = useState(false);
+  const [valueS2, setValueS2] = useState('0')
+  const [itemsS2, setItemsS2] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+  const [openS3, setOpenS3] = useState(false);
+  const [valueS3, setValueS3] = useState('0')
+  const [itemsS3, setItemsS3] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+  const [openS4, setOpenS4] = useState(false);
+  const [valueS4, setValueS4] = useState('0')
+  const [itemsS4, setItemsS4] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+  const [openS5, setOpenS5] = useState(false);
+  const [valueS5, setValueS5] = useState('0')
+  const [itemsS5, setItemsS5] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+  const [openS6, setOpenS6] = useState(false);
+  const [valueS6, setValueS6] = useState('0')
+  const [itemsS6, setItemsS6] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+  const [openS7, setOpenS7] = useState(false);
+  const [valueS7, setValueS7] = useState('0')
+  const [itemsS7, setItemsS7] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+  const [openS8, setOpenS8] = useState(false);
+  const [valueS8, setValueS8] = useState('0')
+  const [itemsS8, setItemsS8] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
@@ -146,7 +273,7 @@ export default function App() {
                 open = {open}
                 value = {value}
                 items = {items}
-                setOpen = {setOpen}
+                setOpen = {setOpenBypass}
                 setValue = {setValue}
                 setItems = {setItems}
 
@@ -182,34 +309,196 @@ export default function App() {
           </View>
 
           <View style={styles.pages}>
-            <View style={{backgroundColor: 'purple'}}>{valueMenu=='settings' ? (<>
 
-              {/* <Image source={require('./assets/img/settingsGearWheel.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4 }} /> */}
-              
-              <View style={{backgroundColor: '#fb6767', border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth-10, }}>
-                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Campus Life</Text>
-                
-                <View style={styles.topTaskbar}>
-                  <DropDownPicker
-                    open = {openS1}
-                    value = {valueS1}
-                    items = {itemsS1}
-                    setOpen = {setOpenS1}
-                    setValue = {setValueS1}
-                    setItems = {setItemsS1}
+            <View style={{backgroundColor: '', marginTop: 5}}>{valueMenu=='settings' ? (<>
+              <ScrollView style={{height: (deviceHeightPart*2)*16}}>
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Campus Life</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS1}
+                      value = {valueS1}
+                      items = {itemsS1}
+                      setOpen = {setOpenS1}
+                      setValue = {setValueS1}
+                      setItems = {setItemsS1}
 
-                    closeAfterSelecting = {true}
-                    showBadgeDot = {false}
-                    theme = "DARK"
-                    searchable = {false}
-                    mode = "BADGE"
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
 
-                    style={{ width: deviceWidth/5, height: taskbarHeight/2, left: deviceWidth/3, top: 4, margin: 5}}/>
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
                 </View>
-              </View>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Something Else</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS2}
+                      value = {valueS2}
+                      items = {itemsS2}
+                      setOpen = {setOpenS2}
+                      setValue = {setValueS2}
+                      setItems = {setItemsS2}
+
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
+
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
               
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS3}
+                      value = {valueS3}
+                      items = {itemsS3}
+                      setOpen = {setOpenS3}
+                      setValue = {setValueS3}
+                      setItems = {setItemsS3}
 
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
 
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS4}
+                      value = {valueS4}
+                      items = {itemsS4}
+                      setOpen = {setOpenS4}
+                      setValue = {setValueS4}
+                      setItems = {setItemsS4}
+
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
+
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS5}
+                      value = {valueS5}
+                      items = {itemsS5}
+                      setOpen = {setOpenS5}
+                      setValue = {setValueS5}
+                      setItems = {setItemsS5}
+
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
+
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS6}
+                      value = {valueS6}
+                      items = {itemsS6}
+                      setOpen = {setOpenS6}
+                      setValue = {setValueS6}
+                      setItems = {setItemsS6}
+
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
+
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS7}
+                      value = {valueS7}
+                      items = {itemsS7}
+                      setOpen = {setOpenS7}
+                      setValue = {setValueS7}
+                      setItems = {setItemsS7}
+
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
+
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  
+                  <View style={styles.topTaskbar}>
+                    <DropDownPicker
+                      open = {openS8}
+                      value = {valueS8}
+                      items = {itemsS8}
+                      setOpen = {setOpenS8}
+                      setValue = {setValueS8}
+                      setItems = {setItemsS8}
+
+                      closeAfterSelecting = {true}
+                      showBadgeDot = {false}
+                      theme = "DARK"
+                      searchable = {false}
+                      mode = "BADGE"
+                      listMode="SCROLLVIEW"
+                      dropDownDirection="BOTTOM"
+
+                      style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                  </View>
+                </View>
+
+                <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
+              </ScrollView>
             </>) : null}</View>
 
             <View>{valueMenu=='myColleges' ? (<>
