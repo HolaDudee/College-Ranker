@@ -87,14 +87,12 @@ export default function App() {
   };
 
   setOpenMenuToggle = () => {
-    setOpenMenu(true)
-    // if (open==true){
-    //   setOpenMenu(true)
-    // }
-    // else{
-    //   setOpenMenu(false)
-    // }
+    setOpenMenu(true),
+    setValue('select'),
+    setOpen(false)
   };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('select')
@@ -111,11 +109,27 @@ export default function App() {
   const [valueMenu, setValueMenu] = useState('home')
   const [itemsMenu, setItemsMenu] = useState([
     {label: 'Home', value: 'home', icon: () => <Image source={require('./assets/img/homeIconV2White.png')} style={{height: 25, width: 25}} />},
-    
     {label: 'My Colleges', value: 'myColleges', icon: () => <Image source={require('./assets/img/collegeIconWhite.png')} style={{height: 25, width: 25}} />},
     {label: 'Settings', value: 'settings', icon: () => <Image source={require('./assets/img/settingsGearWheelWhite.png')} style={{height: 25, width: 25}} />},
   ]);
   
+  const [openS1, setOpenS1] = useState(false);
+  const [valueS1, setValueS1] = useState('0')
+  const [itemsS1, setItemsS1] = useState([
+    {label: '0', value: '0'},
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+  ]);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <SafeAreaProvider>
@@ -125,7 +139,9 @@ export default function App() {
         
         <View style={styles.topMargin}>
           <Text style={{fontSize: 24, fontFamily: ff, marginBottom: 0, fontWeight: 'bold', color: '#3A3B3C'}}>College Ranker</Text>
-            {/*<View style={styles.topTaskbar}>
+        </View>
+
+        <View style={styles.topTaskbar}>
               <DropDownPicker
                 open = {open}
                 value = {value}
@@ -141,8 +157,8 @@ export default function App() {
                 mode = "BADGE"
 
                 style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: 0, margin: 5}}/>
-            </View>*/}
-          {/*<View style={{position: 'absolute', top: -deviceHeightPart*3, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
+            </View>
+          <View style={{position: 'absolute', top: -deviceHeightPart*3, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
             <DropDownPicker
             open={openMenu}
             value={valueMenu}
@@ -159,37 +175,37 @@ export default function App() {
             modalAnimationType="slide"
             style={{height: 0,width: 0,opacity: 0,position: 'absolute',top: 0, left: 0}}
           />
-            <View style={{backgroundColor: '#62b4cf', position: 'absolute', top: deviceHeightPart*4, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
-            <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*4, right: 0, margin: 5, marginTop: 10}}>
+            <View style={{backgroundColor: '#62b4cf', position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
+            <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
               <Image source={require('./assets/img/hamburgerMenuIcon.png')} style={{height: taskbarHeight, width: iconWidth}}/>
             </TouchableOpacity>
-          </View>*/} 
-
-        </View>
+          </View>
 
           <View style={styles.pages}>
-            <View>{valueMenu=='settings' ? (<>
+            <View style={{backgroundColor: 'purple'}}>{valueMenu=='settings' ? (<>
 
-              <Image source={require('./assets/img/settingsGearWheel.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4 }} />
+              {/* <Image source={require('./assets/img/settingsGearWheel.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4 }} /> */}
               
-              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
-                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
-                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
-              </View>
+              <View style={{backgroundColor: '#fb6767', border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth-10, }}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Campus Life</Text>
+                
+                <View style={styles.topTaskbar}>
+                  <DropDownPicker
+                    open = {openS1}
+                    value = {valueS1}
+                    items = {itemsS1}
+                    setOpen = {setOpenS1}
+                    setValue = {setValueS1}
+                    setItems = {setItemsS1}
 
-              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
-                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
-                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
-              </View>
+                    closeAfterSelecting = {true}
+                    showBadgeDot = {false}
+                    theme = "DARK"
+                    searchable = {false}
+                    mode = "BADGE"
 
-              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
-                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
-                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
-              </View>
-
-              <View style={{backgroundColor: '#fb6767', border: 'gray', marginBottom: 5, borderWidth: 1,borderRadius: 10, top: taskbarHeight*1.5, width: deviceWidth}}>
-                <Text style={{fontSize: 24, fontWeight: 'bold', margin: 5,}}>Campus Life</Text>
-                <Text style={{fontSize: 24, fontWeight: 'bold', position: 'absolute', right: 0, margin: 5,}}>RATING GOES HERE</Text>
+                    style={{ width: deviceWidth/5, height: taskbarHeight/2, left: deviceWidth/3, top: 4, margin: 5}}/>
+                </View>
               </View>
               
 
@@ -238,47 +254,6 @@ export default function App() {
 
             </>) : null}</View>
           
-          </View>
-
-          <View style={styles.topTaskbar}>
-            <DropDownPicker
-              open = {open}
-              value = {value}
-              items = {items}
-              setOpen = {setOpen}
-              setValue = {setValue}
-              setItems = {setItems}
-
-              closeAfterSelecting = {true}
-              showBadgeDot = {false}
-              theme = "DARK"
-              searchable = {true}
-              mode = "BADGE"
-
-              style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: -deviceHeightPart*5.35, margin: 5}}/>
-          </View>
-
-          <View style={{position: 'absolute', top: -deviceHeightPart*1.5, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
-            <DropDownPicker
-            open={openMenu}
-            value={valueMenu}
-            items={itemsMenu}
-            setOpen={setOpenMenu}
-            setValue={setValueMenu}
-            setItems={setItemsMenu}
-            
-            closeAfterSelecting={true}
-            textStyle={{fontSize: 30}}
-            theme='DARK'
-            mode='BADGE'
-            listMode='MODAL'
-            modalAnimationType="slide"
-            style={{height: 0,width: 0,opacity: 0,position: 'absolute',top: 0, left: 0}}
-          />
-            <View style={{backgroundColor: '#62b4cf', position: 'absolute', top: deviceHeightPart*4, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
-            <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*4, right: 0, margin: 5, marginTop: 10}}>
-              <Image source={require('./assets/img/hamburgerMenuIcon.png')} style={{height: taskbarHeight, width: iconWidth}}/>
-            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </View>
