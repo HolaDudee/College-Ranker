@@ -152,131 +152,35 @@ export default function App() {
   
   const [openS1, setOpenS1] = useState(false);
   const [valueS1, setValueS1] = useState('0')
-  const [itemsS1, setItemsS1] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS1, setItemsS1] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS2, setOpenS2] = useState(false);
   const [valueS2, setValueS2] = useState('0')
-  const [itemsS2, setItemsS2] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS2, setItemsS2] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS3, setOpenS3] = useState(false);
   const [valueS3, setValueS3] = useState('0')
-  const [itemsS3, setItemsS3] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS3, setItemsS3] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS4, setOpenS4] = useState(false);
   const [valueS4, setValueS4] = useState('0')
-  const [itemsS4, setItemsS4] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS4, setItemsS4] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS5, setOpenS5] = useState(false);
   const [valueS5, setValueS5] = useState('0')
-  const [itemsS5, setItemsS5] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS5, setItemsS5] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS6, setOpenS6] = useState(false);
   const [valueS6, setValueS6] = useState('0')
-  const [itemsS6, setItemsS6] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS6, setItemsS6] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS7, setOpenS7] = useState(false);
   const [valueS7, setValueS7] = useState('0')
-  const [itemsS7, setItemsS7] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS7, setItemsS7] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
   const [openS8, setOpenS8] = useState(false);
   const [valueS8, setValueS8] = useState('0')
-  const [itemsS8, setItemsS8] = useState([
-    {label: '0', value: '0'},
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-  ]);
+  const [itemsS8, setItemsS8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -602,11 +506,11 @@ const sortedRatings = [].concat(ratings)
             </>) : null}</View>
 
             <View>{value=='ntc' ? (<>
-              <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {storeData('ntc','ntc'), console.log('data saved')}}>
+              {/* <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {storeData('ntc','ntc'), console.log('data saved')}}>
                 <Text>SAVE NAME UNDER KEY NAME</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {console.log('OUTPUT VALUE => '+AsyncStorage.getItem('ntc').then(console.log('The function executed successfully!')).catch), console.log('data retrieved?')}}>
+              <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {console.log('OUTPUT VALUE => '), itemOutput = AsyncStorage.getItem('ntc').then(console.log('Date Retrived')).catch, console.log(itemOutput), console.log('data retrieved?')}}>
                 <Text>GET AND LOG</Text>
               </TouchableOpacity>
 
@@ -615,9 +519,9 @@ const sortedRatings = [].concat(ratings)
               </TouchableOpacity>
               <Text>NTC</Text>
 
-              <TouchableOpacity style={{margin: 5, backgroundColor: 'red'}} onPress={() => {console.log(AsyncStorage.getAllKeys()), console.log('maybe cleared')}}>
+              <TouchableOpacity style={{margin: 5, backgroundColor: 'red'}} onPress={() => {console.log(AsyncStorage.getAllKeys().then(console.log('clear complete'))), console.log('maybe cleared')}}>
                 <Text>clear all (danger)</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </>) : null}</View>
           
           </View>
