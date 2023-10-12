@@ -13,6 +13,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 ////////////////////////
 
 
+
+
+
 let deviceHeight = Dimensions.get('window').height;
 let deviceHeightPart = deviceHeight/24;
 let deviceWidth = Dimensions.get('window').width;
@@ -25,9 +28,24 @@ let iconWidth = taskbarHeight;
 let iconBackgroundWidth = iconWidth*1.2;
 let iconBackgroundHeight = taskbarHeight*1.2;
 
+let colleges = [
+  {name: 'UW - Madison', value: 'madison'},
+  {name: 'UW - La Crosse', value: 'laCrosse'},
+  {name: 'UW - Stevens Point', value: 'stevensPoint'},
+  {name: 'NTC', value: 'ntc'},
+  // {name: '', value: ''},
+];
 
-
-
+let factors = [
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+  {name: 'SOMETHING HERE', value: 'somethingHere'},
+];
 
 const storeDataJSON = async (key, valueE) => {
   try {
@@ -114,6 +132,13 @@ export default function App() {
     setOpen(false)
   };
 
+  let homeWhite = require('./assets/img/homeIconV2White.png');
+  let collegeWhite = require('./assets/img/collegeIconWhite.png');
+  let settingsWhite = require('./assets/img/settingsGearWheelWhite.png');
+
+  let plusIcon = require('./assets/img/plusIcon.png');
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   setOpenBypass = () => {
@@ -135,19 +160,19 @@ export default function App() {
   const [value, setValue] = useState('select')
   const [items, setItems] = useState([
     {label: 'Select a College', value: 'select'},
-    {label: 'UW - Madison', value: 'madison'},
-    {label: 'UW - La Crosse', value: 'laCrosse'},
-    {label: 'UW - Stevens Point', value: 'stevensPoint'},
-    {label: 'NTC', value: 'ntc'},
+    {label: colleges[0].name, value: colleges[0].value},
+    {label: colleges[1].name, value: colleges[1].value},
+    {label: colleges[2].name, value: colleges[2].value},
+    {label: colleges[3].name, value: colleges[3].value},
   ]);
 
 
   const [openMenu, setOpenMenu] = useState(false);
   const [valueMenu, setValueMenu] = useState('home')
   const [itemsMenu, setItemsMenu] = useState([
-    {label: 'Home', value: 'home', icon: () => <Image source={require('./assets/img/homeIconV2White.png')} style={{height: 25, width: 25}} />},
-    {label: 'My Colleges', value: 'myColleges', icon: () => <Image source={require('./assets/img/collegeIconWhite.png')} style={{height: 25, width: 25}} />},
-    {label: 'Settings', value: 'settings', icon: () => <Image source={require('./assets/img/settingsGearWheelWhite.png')} style={{height: 25, width: 25}} />},
+    {label: 'Home', value: 'home', icon: () => <Image source={homeWhite} style={{height: 25, width: 25}} />},
+    {label: 'My Colleges', value: 'myColleges', icon: () => <Image source={collegeWhite} style={{height: 25, width: 25}} />},
+    {label: 'Settings', value: 'settings', icon: () => <Image source={settingsWhite} style={{height: 25, width: 25}} />},
   ]);
   
   const [openS1, setOpenS1] = useState(false);
@@ -181,6 +206,41 @@ export default function App() {
   const [openS8, setOpenS8] = useState(false);
   const [valueS8, setValueS8] = useState('0')
   const [itemsS8, setItemsS8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const [openM1, setOpenM1] = useState(false);
+const [valueM1, setValueM1] = useState('0')
+const [itemsM1, setItemsM1] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM2, setOpenM2] = useState(false);
+const [valueM2, setValueM2] = useState('0')
+const [itemsM2, setItemsM2] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM3, setOpenM3] = useState(false);
+const [valueM3, setValueM3] = useState('0')
+const [itemsM3, setItemsM3] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM4, setOpenM4] = useState(false);
+const [valueM4, setValueM4] = useState('0')
+const [itemsM4, setItemsM4] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM5, setOpenM5] = useState(false);
+const [valueM5, setValueM5] = useState('0')
+const [itemsM5, setItemsM5] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM6, setOpenM6] = useState(false);
+const [valueM6, setValueM6] = useState('0')
+const [itemsM6, setItemsM6] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM7, setOpenM7] = useState(false);
+const [valueM7, setValueM7] = useState('0')
+const [itemsM7, setItemsM7] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
+const [openM8, setOpenM8] = useState(false);
+const [valueM8, setValueM8] = useState('0')
+const [itemsM8, setItemsM8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -228,17 +288,26 @@ const sortedRatings = [].concat(ratings)
             setItems = {setItems}
 
             closeAfterSelecting = {true}
+            // dropDownContainerStyle={{
+            //   zIndex: 100,
+            //   marginTop: 7
+            // }}
+            // listItemContainer={{
+            //   zIndex: 100
+            // }}
             showBadgeDot = {false}
             theme = "DARK"
             searchable = {true}
             mode = "BADGE"
+            listMode = "MODAL"
+            modalAnimationType="slide"
 
             style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: 0, margin: 5}}/>
         </View>
         <View style={{position: 'absolute', top: -deviceHeightPart*3, right: (2*deviceWidth/6)-7.5,}}>{valueMenu=='home' ? (<>
           <View style={{backgroundColor: '#62b4cf', borderWidth: 1, position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, width: iconWidth+10}}></View>
-          <TouchableOpacity onPress={this.addCollege} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
-            <Image source={require('./assets/img/plusIcon.png')} style={{height: taskbarHeight, width: iconWidth}}/>
+          <TouchableOpacity onPress={addCollege} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+            <Image source={plusIcon} style={{height: taskbarHeight, width: iconWidth}}/>
           </TouchableOpacity>
           </>) : null}</View>
         <View style={{position: 'absolute', top: -deviceHeightPart*3, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
@@ -267,9 +336,11 @@ const sortedRatings = [].concat(ratings)
           <View style={styles.pages}>
 
             <View style={{backgroundColor: '', marginTop: 5}}>{valueMenu=='settings' ? (<>
+
               <ScrollView style={{height: (deviceHeightPart*2)*16}}>
+
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Campus Life</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[0].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -292,7 +363,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Something Else</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[1].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker open = {openS2}
@@ -314,7 +385,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
               
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[2].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -337,7 +408,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[3].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -360,7 +431,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[4].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -383,7 +454,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[5].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -406,7 +477,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[6].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -429,7 +500,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[7].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -461,7 +532,7 @@ const sortedRatings = [].concat(ratings)
               {/*<Image source={require('./assets/img/collegeIcon.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />*/}
               
               <View style={{width: deviceWidth, alignItems: 'center', marginTop: 15, position: 'relative',}}>
-                <TouchableOpacity onPress={() => {setValueMenu('home'), setValue(sortedRatings[0] )}}>
+                <TouchableOpacity onPress={() => {setValueMenu('home'), setValue('ntc')}}>
                   <View style={{borderWidth: 1, backgroundColor: settingsBackgroundColor, justifyContent: 'center', borderRadius: 10, width: deviceWidth-10, height: deviceHeightPart}}>
                     <Text style={{textAlign: 'left', marginLeft: 10}}>NTC</Text>
                   </View>
@@ -482,6 +553,202 @@ const sortedRatings = [].concat(ratings)
               </TouchableOpacity>*/} 
               {/* <Image source={require('./assets/img/homeIconV2.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} /> */}
               
+              {/**/}
+              <View style={{}}>{value!='select' ? (<>
+
+                <View style={{height: deviceHeightPart*2, backgroundColor: '#0047AB', zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'center', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 15, width: deviceWidth-10, }}>
+                  <View><Text style={{fontSize: deviceHeightPart, shadowOpacity: 100, color: 'gray', fontWeight: 'bold', margin: 5}}>{colleges[colleges.findIndex(e => e.value == value)].name}</Text></View>
+                </View>
+                <ScrollView style={{height: (deviceHeightPart*2)*16}}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Campus Life</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS1}
+                        value = {valueS1}
+                        items = {itemsS1}
+                        setOpen = {setOpenS1}
+                        setValue = {setValueS1}
+                        setItems = {setItemsS1}
+
+                        closeAfterSelecting = {true}
+                        // dropDownContainerStyle={{zIndex: -1}}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                    <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Something Else</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker open = {openS2}
+                        value = {valueS2}
+                        items = {itemsS2}
+                        setOpen = {setOpenS2}
+                        setValue = {setValueS2}
+                        setItems = {setItemsS2}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+                
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS3}
+                        value = {valueS3}
+                        items = {itemsS3}
+                        setOpen = {setOpenS3}
+                        setValue = {setValueS3}
+                        setItems = {setItemsS3}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS4}
+                        value = {valueS4}
+                        items = {itemsS4}
+                        setOpen = {setOpenS4}
+                        setValue = {setValueS4}
+                        setItems = {setItemsS4}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS5}
+                        value = {valueS5}
+                        items = {itemsS5}
+                        setOpen = {setOpenS5}
+                        setValue = {setValueS5}
+                        setItems = {setItemsS5}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS6}
+                        value = {valueS6}
+                        items = {itemsS6}
+                        setOpen = {setOpenS6}
+                        setValue = {setValueS6}
+                        setItems = {setItemsS6}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS7}
+                        value = {valueS7}
+                        items = {itemsS7}
+                        setOpen = {setOpenS7}
+                        setValue = {setValueS7}
+                        setItems = {setItemsS7}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+
+                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -8, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                    
+                    <View style={styles.topTaskbar}>
+                      <DropDownPicker
+                        open = {openS8}
+                        value = {valueS8}
+                        items = {itemsS8}
+                        setOpen = {setOpenS8}
+                        setValue = {setValueS8}
+                        setItems = {setItemsS8}
+
+                        closeAfterSelecting = {true}
+                        showBadgeDot = {false}
+                        theme = "DARK"
+                        searchable = {false}
+                        mode = "BADGE"
+                        listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
+
+                        style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
+                    </View>
+                  </View>
+                  {/* <TouchableOpacity onPress={console.log(weights)}><Text>LOG WEIGHTS</Text></TouchableOpacity> */}
+                  <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
+                  </ScrollView>
+                </>) : null}</View>
+              {/**/}
               
             </>) : null}</View>
           </View>
@@ -489,19 +756,19 @@ const sortedRatings = [].concat(ratings)
           <View style={styles.colleges}>
             <View>{value=='madison' ? (<>
 
-              <Text>UW - Madison</Text>
+              {/* <Text>UW - Madison</Text> */}
 
             </>) : null}</View>
 
             <View>{value=='laCrosse' ? (<>
 
-              <Text>UW - La Crosse</Text>
+              {/* <Text>UW - La Crosse</Text> */}
 
             </>) : null}</View>
 
             <View>{value=='stevensPoint' ? (<>
 
-              <Text>UW - Stevens Point</Text>
+              {/* <Text>UW - Stevens Point</Text> */}
 
             </>) : null}</View>
 
