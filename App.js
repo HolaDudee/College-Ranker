@@ -3,7 +3,7 @@ import {} from 'expo';
 <StatusBar style="dark" />
 import React, { Component, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ImageBackground, TouchableOpacity, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,31 +20,34 @@ let deviceHeight = Dimensions.get('window').height;
 let deviceHeightPart = deviceHeight/24;
 let deviceWidth = Dimensions.get('window').width;
 let ff = "Avenir";
-let color = "red";
-let settingsBackgroundColor = '#fb6767';
+let color = "#8186B6";
+// let settingsBackgroundColor = '#fb6767';
+// let settingsBackgroundColor = '#3A3B3C';
+let settingsBackgroundColor = color;
 
 let taskbarHeight = deviceHeightPart*1.5;
 let iconWidth = taskbarHeight;
 let iconBackgroundWidth = iconWidth*1.2;
 let iconBackgroundHeight = taskbarHeight*1.2;
+let iconColor = '#A5FFB3';
 
-let colleges = [
-  {name: 'UW - Madison', value: 'madison'},
-  {name: 'UW - La Crosse', value: 'laCrosse'},
-  {name: 'UW - Stevens Point', value: 'stevensPoint'},
-  {name: 'NTC', value: 'ntc'},
+let initColleges = [
+  {name: 'UW - Madison', value: 'madison', rating: {}},
+  {name: 'UW - La Crosse', value: 'laCrosse', rating: {}},
+  {name: 'UW - Stevens Point', value: 'stevensPoint', rating: {}},
+  {name: 'NTC', value: 'ntc', rating: {}},
   // {name: '', value: ''},
 ];
 
-let factors = [
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
-  {name: 'SOMETHING HERE', value: 'somethingHere'},
+let initFactors = [
+  {name: 'SOMETHING1', value: 'something1'},
+  {name: 'SOMETHING2', value: 'something2'},
+  {name: 'SOMETHING3', value: 'something3'},
+  {name: 'SOMETHING4', value: 'something4'},
+  {name: 'SOMETHING5', value: 'something5'},
+  {name: 'SOMETHING6', value: 'something6'},
+  {name: 'SOMETHING7', value: 'something7'},
+  {name: 'SOMETHING8', value: 'something8'},
 ];
 
 const storeDataJSON = async (key, valueE) => {
@@ -86,45 +89,53 @@ const getData = async (key) => {
 
 export default function App() {
 
-  const [settings, setSettings] = useState('none')
-  const [mainDisplay, setMainDisplay] = useState('block')
-  const [myColleges, setMyColleges] = useState('none')
+  const [factors, setFactors] = useState(initFactors)
+  const [colleges, setColleges] = useState(initColleges)
 
-  let addCollege = () => {
-    console.log('nothing here')
+  // const [settings, setSettings] = useState('none')
+  // const [mainDisplay, setMainDisplay] = useState('block')
+  // const [myColleges, setMyColleges] = useState('none')
+
+  let addCollege = (nameI, valueI) => {
+    setColleges(current => [...current, {name: nameI, value: valueI, rating: {}}]);
+    console.log(colleges)
   };
 
-  let togSettings = () => {
-    if (settings=='block'){
-      setSettings('none'),
-      setMyColleges('none'),
-      setMainDisplay('block')
-    }
-    else {
-      setSettings('block'),
-      setMainDisplay('none'),
-      setMyColleges('none')
-    }
+  let addCollegeModal = () => {
+    setModalVisible(true)
   };
 
-  let togMyColleges = () => {
-    if (myColleges=='block'){
-      setSettings('none'),
-      setMyColleges('none'),
-      setMainDisplay('block')
-    }
-    else {
-      setSettings('none'),
-      setMainDisplay('none'),
-      setMyColleges('block')
-    }
-  };
+  // let togSettings = () => {
+  //   if (settings=='block'){
+  //     setSettings('none'),
+  //     setMyColleges('none'),
+  //     setMainDisplay('block')
+  //   }
+  //   else {
+  //     setSettings('block'),
+  //     setMainDisplay('none'),
+  //     setMyColleges('none')
+  //   }
+  // };
 
-  let togHome = () => {
-    setSettings('none'),
-    setMyColleges('none'),
-    setMainDisplay('block')
-  };
+  // let togMyColleges = () => {
+  //   if (myColleges=='block'){
+  //     setSettings('none'),
+  //     setMyColleges('none'),
+  //     setMainDisplay('block')
+  //   }
+  //   else {
+  //     setSettings('none'),
+  //     setMainDisplay('none'),
+  //     setMyColleges('block')
+  //   }
+  // };
+
+  // let togHome = () => {
+  //   setSettings('none'),
+  //   setMyColleges('none'),
+  //   setMainDisplay('block')
+  // };
 
   setOpenMenuToggle = () => {
     setOpenMenu(true),
@@ -135,7 +146,7 @@ export default function App() {
   let homeWhite = require('./assets/img/homeIconV2White.png');
   let collegeWhite = require('./assets/img/collegeIconWhite.png');
   let settingsWhite = require('./assets/img/settingsGearWheelWhite.png');
-
+  let hamburgerIcon = require('./assets/img/hamburgerMenuIcon.png');
   let plusIcon = require('./assets/img/plusIcon.png');
 
 
@@ -209,59 +220,63 @@ export default function App() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const [openM1, setOpenM1] = useState(false);
-const [valueM1, setValueM1] = useState('0')
-const [itemsM1, setItemsM1] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM1, setOpenM1] = useState(false);
+  const [valueM1, setValueM1] = useState('0')
+  const [itemsM1, setItemsM1] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM2, setOpenM2] = useState(false);
-const [valueM2, setValueM2] = useState('0')
-const [itemsM2, setItemsM2] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM2, setOpenM2] = useState(false);
+  const [valueM2, setValueM2] = useState('0')
+  const [itemsM2, setItemsM2] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM3, setOpenM3] = useState(false);
-const [valueM3, setValueM3] = useState('0')
-const [itemsM3, setItemsM3] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM3, setOpenM3] = useState(false);
+  const [valueM3, setValueM3] = useState('0')
+  const [itemsM3, setItemsM3] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM4, setOpenM4] = useState(false);
-const [valueM4, setValueM4] = useState('0')
-const [itemsM4, setItemsM4] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM4, setOpenM4] = useState(false);
+  const [valueM4, setValueM4] = useState('0')
+  const [itemsM4, setItemsM4] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM5, setOpenM5] = useState(false);
-const [valueM5, setValueM5] = useState('0')
-const [itemsM5, setItemsM5] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM5, setOpenM5] = useState(false);
+  const [valueM5, setValueM5] = useState('0')
+  const [itemsM5, setItemsM5] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM6, setOpenM6] = useState(false);
-const [valueM6, setValueM6] = useState('0')
-const [itemsM6, setItemsM6] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM6, setOpenM6] = useState(false);
+  const [valueM6, setValueM6] = useState('0')
+  const [itemsM6, setItemsM6] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM7, setOpenM7] = useState(false);
-const [valueM7, setValueM7] = useState('0')
-const [itemsM7, setItemsM7] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM7, setOpenM7] = useState(false);
+  const [valueM7, setValueM7] = useState('0')
+  const [itemsM7, setItemsM7] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
-const [openM8, setOpenM8] = useState(false);
-const [valueM8, setValueM8] = useState('0')
-const [itemsM8, setItemsM8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [openM8, setOpenM8] = useState(false);
+  const [valueM8, setValueM8] = useState('0')
+  const [itemsM8, setItemsM8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-let ratings = [
-  // [{rating: valueS1}, {rating: valueS2}, {rating: valueS3}, {rating: valueS4}, {rating: valueS5}, {rating: valueS6}, {rating: valueS7}, {rating: valueS8}],
-  // [{}]
-]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
+  const [modalVisible, setModalVisible] = useState(false);
 
-let weights = [
-  {weight: valueS1},
-  {weight: valueS2},
-  {weight: valueS3},
-  {weight: valueS4},
-  {weight: valueS5},
-  {weight: valueS6},
-  {weight: valueS7},
-  {weight: valueS8},
-  
-];
+  const [text, setText] = useState();
 
-const sortedRatings = [].concat(ratings)
+  let ratings = [
+    // [{rating: valueS1}, {rating: valueS2}, {rating: valueS3}, {rating: valueS4}, {rating: valueS5}, {rating: valueS6}, {rating: valueS7}, {rating: valueS8}],
+    // [{}]
+  ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
+
+  let weights = [
+    {weight: valueS1},
+    {weight: valueS2},
+    {weight: valueS3},
+    {weight: valueS4},
+    {weight: valueS5},
+    {weight: valueS6},
+    {weight: valueS7},
+    {weight: valueS8},
+    
+  ];
+
+  const sortedRatings = [].concat(ratings)
     .sort((a, b) => a.rating > b.rating ? 1 : -1)
     .map((item, i) => 
         <div key={i}> {item.rating}</div>
@@ -271,7 +286,7 @@ const sortedRatings = [].concat(ratings)
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
-        <View style={{backgroundColor:color, position:'absolute', top:0, left:0, width: deviceWidth, height:deviceHeightPart*1.5}}></View>
+        <View style={{backgroundColor: color, position:'absolute', top:0, left:0, width: deviceWidth, height:deviceHeightPart*1.5}}></View>
         <SafeAreaView>
         
         <View style={styles.topMargin}>
@@ -283,10 +298,14 @@ const sortedRatings = [].concat(ratings)
             open = {open}
             value = {value}
             items = {items}
-            setOpen = {setOpenBypass}
+            // setOpen = {setOpenBypass}
+            setOpen = {setOpen}
             setValue = {setValue}
             setItems = {setItems}
 
+            onChangeValue={(value) => {
+              setValueMenu('home')
+            }}
             closeAfterSelecting = {true}
             // dropDownContainerStyle={{
             //   zIndex: 100,
@@ -305,10 +324,69 @@ const sortedRatings = [].concat(ratings)
             style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: 0, margin: 5}}/>
         </View>
         <View style={{position: 'absolute', top: -deviceHeightPart*3, right: (2*deviceWidth/6)-7.5,}}>{valueMenu=='home' ? (<>
-          <View style={{backgroundColor: '#62b4cf', borderWidth: 1, position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, width: iconWidth+10}}></View>
-          <TouchableOpacity onPress={addCollege} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+          <View style={{backgroundColor: iconColor, borderWidth: 1, position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, width: iconWidth+10}}></View>
+          <TouchableOpacity onPress={addCollegeModal} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
             <Image source={plusIcon} style={{height: taskbarHeight, width: iconWidth}}/>
           </TouchableOpacity>
+          <Modal
+            // animationType="slide"
+            transparent={false}
+            visible={modalVisible}
+            animationType='slide'
+            style={{}}
+            // onRequestClose={() => {
+            //   Alert.alert('Modal has been closed.');
+            //   setModalVisible(!modalVisible);
+            // }}
+            >
+              <SafeAreaView style={{backgroundColor: '#2c2b2b'}}>
+
+                <View style={{alignItems: 'flex-end', width: deviceWidth}}>
+                  <TouchableOpacity style={{margin: 5}} onPress={() => {setModalVisible(!modalVisible)}}>{/*</TouchableOpacity></SafeAreaView>, Alert.alert('Modal Closed'), console.log('Modal Closed')}}>*/}
+                    <View style={{height: deviceHeightPart, width: deviceHeightPart, margin: 2, borderWidth: 1, borderRadius: 5, backgroundColor: iconColor, textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
+                      <Text style={{fontSize: deviceHeightPart-10, margin: 0}}>X</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{width: deviceWidth-10, marginLeft: 5, backgroundColor: 'gray', borderRadius: 10}}>
+                  <TextInput
+                    style={{
+                      // width: deviceWidth-10,
+                      borderWidth: 1,
+                      borderRadius: 10,
+                      // marginLeft: 5,
+                      height: deviceHeightPart*1.5
+                      
+                    }}
+                    keyboardAppearance='dark'
+                    onChangeText={setText}
+                    value={text}
+                    placeholder="Enter college name"
+                    placeholderTextColor='white'
+                  />
+                </View>
+
+                <View style={{width: deviceWidth, alignItems: 'center', marginTop: 50}}>
+                  <TouchableOpacity style={{margin: 5}} onPress={() => {setModalVisible(!modalVisible)}}>{/*</TouchableOpacity></SafeAreaView>, Alert.alert('Modal Closed'), console.log('Modal Closed')}}>*/}
+                    <View style={{height: deviceHeightPart, width: deviceWidth-120, margin: 0, borderWidth: 1, borderRadius: 10, backgroundColor: iconColor, textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
+                      <Text style={{fontSize: deviceHeightPart-10, margin: 0}}>Add College</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{width: deviceWidth, height: deviceHeightPart*22.5}}></View>
+                {/* <View>
+                  <TextInput
+                    style={{}}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    // placeholder="useless placeholder"
+                  />
+                </View> */}
+
+              </SafeAreaView>
+            </Modal>
           </>) : null}</View>
         <View style={{position: 'absolute', top: -deviceHeightPart*3, right: 10, width: deviceWidth/15, height: deviceHeightPart}}>
           <DropDownPicker
@@ -327,9 +405,9 @@ const sortedRatings = [].concat(ratings)
             modalAnimationType="slide"
             style={{height: 0,width: 0,opacity: 0,position: 'absolute',top: 0, left: 0}}
           />
-          <View style={{backgroundColor: '#62b4cf', position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
+          <View style={{backgroundColor: iconColor, borderWidth: 1, position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 7.5, height: taskbarHeight+10, width: iconWidth+10}}></View>
           <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
-            <Image source={require('./assets/img/hamburgerMenuIcon.png')} style={{height: taskbarHeight, width: iconWidth}}/>
+            <Image source={hamburgerIcon} style={{height: taskbarHeight, width: iconWidth}}/>
           </TouchableOpacity>
         </View>
 
@@ -561,7 +639,7 @@ const sortedRatings = [].concat(ratings)
                 </View>
                 <ScrollView style={{height: (deviceHeightPart*2)*16}}>
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Campus Life</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[0].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -585,7 +663,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                    <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Something Else</Text></View>
+                    <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[1].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker open = {openS2}
@@ -607,7 +685,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
                 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[2].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -630,7 +708,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[3].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -653,7 +731,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[4].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -676,7 +754,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[5].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -699,7 +777,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[6].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -722,7 +800,7 @@ const sortedRatings = [].concat(ratings)
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -8, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>Another Thing</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[7].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -744,7 +822,7 @@ const sortedRatings = [].concat(ratings)
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
                   </View>
-                  {/* <TouchableOpacity onPress={console.log(weights)}><Text>LOG WEIGHTS</Text></TouchableOpacity> */}
+                  <TouchableHighlight onPress={() => setFactors(initFactors)}><Text>RESET FACTORS</Text></TouchableHighlight>
                   <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
                   </ScrollView>
                 </>) : null}</View>
@@ -802,7 +880,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: '#2B305E',
     // alignItems: 'center',
   },
   colleges: {
