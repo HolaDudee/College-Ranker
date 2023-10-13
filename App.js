@@ -3,7 +3,7 @@ import {} from 'expo';
 <StatusBar style="dark" />
 import React, { Component, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { AppRegistry, Text, View, StyleSheet, Image, Item, FlatList, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, FlatList, SectionList, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -32,11 +32,56 @@ let iconBackgroundWidth = iconWidth*1.2;
 let iconBackgroundHeight = taskbarHeight*1.2;
 let iconColor = '#A5FFB3';
 
-
+// const Item = ({label}) => (
+//   <View style={{backgroundColor: 'purple', height: deviceHeightPart, width: deviceWidth-10}}>
+//     <Text style={styles.title}>{label}</Text>
+//   </View>
+// );
 
 export default function App() {
 
-  const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select'}])
+  // const [text2, setText2] = useState('')
+  // const [modalVisible2, setModalVisible2] = useState(false)
+
+  // const [blankRating, setBlackRating] = useState([{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0}])
+  const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()}])
+
+  let blankRating = [{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0}]
+  const [ratingsL, setRatingsL] = useState(blankRating)
+
+  let getRatings = (ratingKey) => {
+    // console.log(valueT[1].ratingKey)
+    // console.log(blankRating[0].value)
+    updateRatingsL(ratingKey)
+  };
+
+  const updateRatingsL = async (key) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
+      const value = JSON.parse(jsonValue);
+      // return jsonValue != null ? JSON.parse(jsonValue) : null;
+      if (value!=null){
+        // console.log('inFunc => ');
+        // console.log(value);
+        setRatingsL(value)
+        // console.log(valueT)
+        return value
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
+  const addRating = async (key, valueE) => {
+    try {
+      // console.log('inFunc list - ')
+      // console.log(valueE)
+      const jsonValue = JSON.stringify(valueE);
+      await AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {
+      console.log(e)
+    }
+  };
 
   // const renderItem = ({item}) => {
   //   // const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
@@ -53,11 +98,11 @@ export default function App() {
   // };
 
   let initColleges = [
-    {label: 'Select a College', value: 'select', id: uuid.v4()},
-    {label: 'UW - Madison', value: 'madison', rating: {}, id: uuid.v4()},
-    {label: 'UW - La Crosse', value: 'laCrosse', rating: {}, id: uuid.v4()},
-    {label: 'UW - Stevens Point', value: 'stevensPoint', rating: {}, id: uuid.v4()},
-    {label: 'NTC', value: 'ntc', rating: {}, id: uuid.v4()},
+    {label: 'Select a College', value: 'select', ratingKey: 'ratingKey0',key: uuid.v4()},
+    {label: 'UW - Madison', value: 'madison', ratingKey: 'ratingKey1', key: uuid.v4()},
+    {label: 'UW - La Crosse', value: 'laCrosse', ratingKey: 'ratingKey2', key: uuid.v4()},
+    {label: 'UW - Stevens Point', value: 'stevensPoint', ratingKey: 'ratingKey3', key: uuid.v4()},
+    {label: 'NTC', value: 'ntc', ratingKey: 'ratingKey4', key: uuid.v4()},
     // {name: '', value: ''},
   ];
   
@@ -65,14 +110,14 @@ export default function App() {
   
   
   let initFactors = [
-    {name: 'SOMETHING1', value: 'something1', id: uuid.v4()},
-    {name: 'SOMETHING2', value: 'something2', id: uuid.v4()},
-    {name: 'SOMETHING3', value: 'something3', id: uuid.v4()},
-    {name: 'SOMETHING4', value: 'something4', id: uuid.v4()},
-    {name: 'SOMETHING5', value: 'something5', id: uuid.v4()},
-    {name: 'SOMETHING6', value: 'something6', id: uuid.v4()},
-    {name: 'SOMETHING7', value: 'something7', id: uuid.v4()},
-    {name: 'SOMETHING8', value: 'something8', id: uuid.v4()},
+    {name: 'SOMETHING1', value: 'something1', key: uuid.v4()},
+    {name: 'SOMETHING2', value: 'something2', key: uuid.v4()},
+    {name: 'SOMETHING3', value: 'something3', key: uuid.v4()},
+    {name: 'SOMETHING4', value: 'something4', key: uuid.v4()},
+    {name: 'SOMETHING5', value: 'something5', key: uuid.v4()},
+    {name: 'SOMETHING6', value: 'something6', key: uuid.v4()},
+    {name: 'SOMETHING7', value: 'something7', key: uuid.v4()},
+    {name: 'SOMETHING8', value: 'something8', key: uuid.v4()},
   ];
   
   const storeDataJSON = async (key, valueE) => {
@@ -155,7 +200,7 @@ export default function App() {
   let addCollege = (nameI, valueI) => {
     // setValueT()
     // let cushbear = [initColleges]
-    const newList = valueT.concat({label: nameI, value: valueI, rating: {}, id: uuid.v4()});
+    const newList = valueT.concat({label: nameI, value: valueI, rating: {}, key: uuid.v4()});
     setValueT(newList)
     // let cushbear = [current => [...current, {label: nameI, value: valueI, rating: {}}]]
     // console.log(cushbear)
@@ -291,6 +336,8 @@ export default function App() {
     {label: 'Home', value: 'home', icon: () => <Image source={homeWhite} style={{height: 25, width: 25}} />},
     {label: 'My Colleges', value: 'myColleges', icon: () => <Image source={collegeWhite} style={{height: 25, width: 25}} />},
     {label: 'Settings', value: 'settings', icon: () => <Image source={settingsWhite} style={{height: 25, width: 25}} />},
+    {label: 'Dev Menu', value: 'devMenu', icon: () => <Image source={settingsWhite} style={{height: 25, width: 25}} />},
+    
   ]);
   
   const [openS1, setOpenS1] = useState(false);
@@ -372,14 +419,14 @@ export default function App() {
   ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
 
   let weights = [
-    {weight: valueS1, id: uuid.v4()},
-    {weight: valueS2, id: uuid.v4()},
-    {weight: valueS3, id: uuid.v4()},
-    {weight: valueS4, id: uuid.v4()},
-    {weight: valueS5, id: uuid.v4()},
-    {weight: valueS6, id: uuid.v4()},
-    {weight: valueS7, id: uuid.v4()},
-    {weight: valueS8, id: uuid.v4()},
+    {weight: valueS1, key: uuid.v4()},
+    {weight: valueS2, key: uuid.v4()},
+    {weight: valueS3, key: uuid.v4()},
+    {weight: valueS4, key: uuid.v4()},
+    {weight: valueS5, key: uuid.v4()},
+    {weight: valueS6, key: uuid.v4()},
+    {weight: valueS7, key: uuid.v4()},
+    {weight: valueS8, key: uuid.v4()},
     
   ];
 
@@ -407,11 +454,24 @@ export default function App() {
             items = {colleges}
             // setOpen = {setOpenBypass}
             setOpen = {setOpenUpdate}
+            // setOpen = {setOpen}
             setValue = {setValue}
             setItems = {setColleges}
 
             onChangeValue={(value) => {
               setValueMenu('home')
+              let newArray = [valueM1,valueM2,valueM3,valueM4,valueM5,valueM6,valueM7,valueM8,]
+              console.log('newArray - ')
+              console.log(newArray)
+              let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
+              console.log()
+              console.log('rKey - ')
+              console.log(rKey)
+              addRating(rKey, newArray)
+              console.log()
+              updateRatingsL(rKey)
+              console.log('ratingsL - ')
+              console.log(ratingsL)
             }}
             closeAfterSelecting = {true}
             // dropDownContainerStyle={{
@@ -539,6 +599,26 @@ export default function App() {
         </View>
 
           <View style={styles.pages}>
+
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+
+
+          <View>{valueMenu=='devMenu' ? (<>
+            <View style={{width: deviceWidth, textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}><Text style={{color: 'white', shadowOpacity: 100, margin: 15, fontSize: 24}}>Welcome to the Dev Menu</Text></View>
+
+
+
+          </>) : null}</View>
+
+
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+
 
             <View style={{backgroundColor: '', marginTop: 5}}>{valueMenu=='settings' ? (<>
 
@@ -741,9 +821,12 @@ export default function App() {
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
-
             <View>{valueMenu=='myColleges' ? (<>
 
+              <TouchableOpacity onPress={() => {addRating('ratingKey4', blankRating), console.log('rating added')}} style={{position: '', top: 0, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+                <View style={{height: taskbarHeight, width: iconWidth, backgroundColor: 'red'}}/>
+              </TouchableOpacity>
+          
               {/*<Image source={require('./assets/img/collegeIcon.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />*/}
               
               {/* <View style={{width: deviceWidth, alignItems: 'center', marginTop: 15, position: 'relative',}}>
@@ -761,11 +844,30 @@ export default function App() {
               </View> */}
 
 
-              <FlatList
-                data={colleges}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                // extraData={selectedId}
+              {/* <FlatList
+                data={valueT[0]}
+                renderItem={({item}) => <Item title={item.label} />}
+                keyExtractor={item => item.key}
+              /> */}
+
+              {/* <SectionList
+                renderItem={({item}) => <ListItem title={item.label} />} // Your record component here.
+                renderSectionHeader={({section}) => <H1 title={section.title} />} // Your date component here.
+                sections={valueT[0]}
+              /> */}
+
+              <FlatList 
+                data={valueT.slice(1)}
+                renderItem={({ item }) => 
+                  <View style={{backgroundColor: color, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
+                    <Text style={{fontSize: 24, marginLeft: 3.5}}>{item.label}</Text>
+
+
+                    <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => {console.log(ratingsL[0].value)}}><Text>LOG IT</Text></TouchableOpacity>
+                  </View>
+                }
+                // keyExtractor={(item) => item.key}
               />
               
             </>) : null}</View>
