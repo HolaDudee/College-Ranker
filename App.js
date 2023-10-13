@@ -101,6 +101,28 @@ export default function App() {
     console.log(colleges)
   };
 
+  let formatCollegeName = (name) => {
+    name = name + ' '
+    let formattedName = ''
+    let lastIndex = 0
+    console.log(name.toLowerCase().indexOf(' '))
+    while (name.toLowerCase().indexOf(' ')!=-1){
+      formattedName = formattedName + name.substring(lastIndex, name.toLowerCase().indexOf(' '))
+      lastIndex = name.toLowerCase().indexOf(' ')
+      name = name.replace(' ', '')
+      // console.log(name.toLowerCase().indexOf(' '))
+      // console.log(formattedName)
+    }
+    return formattedName
+  };
+
+  let addCollegeSumbitButton = () => {
+    let valueR = formatCollegeName(text)
+    console.log(text)
+    console.log(valueR)
+    // addCollege(text, valueR)
+  };
+
   let addCollegeModal = () => {
     setModalVisible(true)
   };
@@ -356,19 +378,22 @@ export default function App() {
                       borderWidth: 1,
                       borderRadius: 10,
                       // marginLeft: 5,
-                      height: deviceHeightPart*1.5
-                      
+                      height: deviceHeightPart*1.5,
+                      textAlign: 'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}
                     keyboardAppearance='dark'
                     onChangeText={setText}
                     value={text}
                     placeholder="Enter college name"
                     placeholderTextColor='white'
+                    
                   />
                 </View>
 
                 <View style={{width: deviceWidth, alignItems: 'center', marginTop: 50}}>
-                  <TouchableOpacity style={{margin: 5}} onPress={() => {setModalVisible(!modalVisible)}}>{/*</TouchableOpacity></SafeAreaView>, Alert.alert('Modal Closed'), console.log('Modal Closed')}}>*/}
+                  <TouchableOpacity style={{margin: 5}} onPress={addCollegeSumbitButton}>{/*</TouchableOpacity></SafeAreaView>, Alert.alert('Modal Closed'), console.log('Modal Closed')}}>*/}
                     <View style={{height: deviceHeightPart, width: deviceWidth-120, margin: 0, borderWidth: 1, borderRadius: 10, backgroundColor: iconColor, textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
                       <Text style={{fontSize: deviceHeightPart-10, margin: 0}}>Add College</Text>
                     </View>
