@@ -3,10 +3,11 @@ import {} from 'expo';
 <StatusBar style="dark" />
 import React, { Component, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, Item, FlatList, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 
   ////////////////////////
  ///  npx expo start  ///
@@ -31,81 +32,152 @@ let iconBackgroundWidth = iconWidth*1.2;
 let iconBackgroundHeight = taskbarHeight*1.2;
 let iconColor = '#A5FFB3';
 
-let initColleges = [
-  {name: 'UW - Madison', value: 'madison', rating: {}},
-  {name: 'UW - La Crosse', value: 'laCrosse', rating: {}},
-  {name: 'UW - Stevens Point', value: 'stevensPoint', rating: {}},
-  {name: 'NTC', value: 'ntc', rating: {}},
-  // {name: '', value: ''},
-];
 
-let initFactors = [
-  {name: 'SOMETHING1', value: 'something1'},
-  {name: 'SOMETHING2', value: 'something2'},
-  {name: 'SOMETHING3', value: 'something3'},
-  {name: 'SOMETHING4', value: 'something4'},
-  {name: 'SOMETHING5', value: 'something5'},
-  {name: 'SOMETHING6', value: 'something6'},
-  {name: 'SOMETHING7', value: 'something7'},
-  {name: 'SOMETHING8', value: 'something8'},
-];
-
-const storeDataJSON = async (key, valueE) => {
-  try {
-    const jsonValue = JSON.stringify(valueE);
-    await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {
-    console.log(e)
-  }
-};
-
-const getDataJSON = async (key) => {
-  try {
-    const jsonValue = await AsyncStorage.getItem(key);
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    console.log(e)
-  }
-};
-
-const storeData = async (key, valueD) => {
-  try {
-    console.log('key - '+key+' - value - '+valueD)
-    await AsyncStorage.setItem(key, valueD);
-  } catch (e) {
-    console.log(e)
-  }
-};
-
-const getData = async (key) => {
-  try {
-    const valueF = await AsyncStorage.getItem(key);
-    console.log('key - '+key+' - value - '+valueF)
-    return valueF;
-  } catch (e) {
-    console.log(e)
-  }
-};
 
 export default function App() {
 
+  const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select'}])
+
+  // const renderItem = ({item}) => {
+  //   // const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+  //   // const color = item.id === selectedId ? 'white' : 'black';
+
+  //   return (
+  //     <Item
+  //       item={item}
+  //       // onPress={() => setSelectedId(item.id)}
+  //       backgroundColor={color}
+  //       textColor={'white'}
+  //     />
+  //   );
+  // };
+
+  let initColleges = [
+    {label: 'Select a College', value: 'select', id: uuid.v4()},
+    {label: 'UW - Madison', value: 'madison', rating: {}, id: uuid.v4()},
+    {label: 'UW - La Crosse', value: 'laCrosse', rating: {}, id: uuid.v4()},
+    {label: 'UW - Stevens Point', value: 'stevensPoint', rating: {}, id: uuid.v4()},
+    {label: 'NTC', value: 'ntc', rating: {}, id: uuid.v4()},
+    // {name: '', value: ''},
+  ];
+  
+
+  
+  
+  let initFactors = [
+    {name: 'SOMETHING1', value: 'something1', id: uuid.v4()},
+    {name: 'SOMETHING2', value: 'something2', id: uuid.v4()},
+    {name: 'SOMETHING3', value: 'something3', id: uuid.v4()},
+    {name: 'SOMETHING4', value: 'something4', id: uuid.v4()},
+    {name: 'SOMETHING5', value: 'something5', id: uuid.v4()},
+    {name: 'SOMETHING6', value: 'something6', id: uuid.v4()},
+    {name: 'SOMETHING7', value: 'something7', id: uuid.v4()},
+    {name: 'SOMETHING8', value: 'something8', id: uuid.v4()},
+  ];
+  
+  const storeDataJSON = async (key, valueE) => {
+    try {
+      // console.log('inFunc list - ')
+      // console.log(valueE)
+      const jsonValue = JSON.stringify(valueE);
+      await AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {
+      console.log(e)
+    }
+  };
+  
+  const updateColleges = async (key) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
+      const value = JSON.parse(jsonValue);
+      // return jsonValue != null ? JSON.parse(jsonValue) : null;
+      if (value!=null){
+        // console.log('inFunc => ');
+        // console.log(value);
+        setValueT(value)
+        // console.log(valueT)
+        return value
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
+  const getDataJSON = async (key) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
+      const value = JSON.parse(jsonValue);
+      // return jsonValue != null ? JSON.parse(jsonValue) : null;
+      if (value!=null){
+        // console.log('inFunc => ');
+        // console.log(value);
+        // setValueT(value)
+        // console.log(valueT)
+        return value
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  };
+  
+  // const storeData = async (key, valueD) => {
+  //   try {
+  //     console.log('key - '+key+' - value - '+valueD)
+  //     await AsyncStorage.setItem(key, valueD);
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // };
+  
+  // const getData = async (key) => {
+  //   try {
+  //     const valueF = await AsyncStorage.getItem(key);
+  //     console.log('key - '+key+' - value - '+valueF)
+  //     return valueF;
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // };
+  
+  React.useEffect(() => {
+    updateColleges('collegeList')
+  },[]);
+  // let initColleges = updateColleges('collegeList')
+  
+
   const [factors, setFactors] = useState(initFactors)
-  const [colleges, setColleges] = useState(initColleges)
+  const [colleges, setColleges] = useState(valueT)
 
   // const [settings, setSettings] = useState('none')
   // const [mainDisplay, setMainDisplay] = useState('block')
   // const [myColleges, setMyColleges] = useState('none')
 
   let addCollege = (nameI, valueI) => {
-    setColleges(current => [...current, {name: nameI, value: valueI, rating: {}}]);
-    console.log(colleges)
+    // setValueT()
+    // let cushbear = [initColleges]
+    const newList = valueT.concat({label: nameI, value: valueI, rating: {}, id: uuid.v4()});
+    setValueT(newList)
+    // let cushbear = [current => [...current, {label: nameI, value: valueI, rating: {}}]]
+    // console.log(cushbear)
+    // console.log(valueT)
+    // console.log()
+    // console.log('updatteed valueT - ')
+    // console.log(valueT)
+    // console.log()
+    // console.log('newList - ')
+    // console.log(newList)
+    // console.log()
+    storeDataJSON('collegeList', newList)
+    updateColleges('collegeList')
+    // console.log(valueT)
   };
 
   let formatCollegeName = (name) => {
     name = name + ' '
     let formattedName = ''
     let lastIndex = 0
-    console.log(name.toLowerCase().indexOf(' '))
+    // console.log(name.toLowerCase().indexOf(' '))
+    name = name.replaceAll('-', '')
     while (name.toLowerCase().indexOf(' ')!=-1){
       formattedName = formattedName + name.substring(lastIndex, name.toLowerCase().indexOf(' '))
       lastIndex = name.toLowerCase().indexOf(' ')
@@ -113,14 +185,19 @@ export default function App() {
       // console.log(name.toLowerCase().indexOf(' '))
       // console.log(formattedName)
     }
+    // console.log('formattedName before => ' + formattedName)
+    formattedName = formattedName.replace(formattedName.substring(0,1), formattedName.substring(0,1).toLowerCase())
+    // console.log('formattedName after => ' + formattedName)
     return formattedName
   };
 
   let addCollegeSumbitButton = () => {
     let valueR = formatCollegeName(text)
-    console.log(text)
-    console.log(valueR)
-    // addCollege(text, valueR)
+    // console.log(text)
+    // console.log(valueR)
+    addCollege(text, valueR)
+    setText('')
+    setModalVisible(!modalVisible)
   };
 
   let addCollegeModal = () => {
@@ -191,14 +268,22 @@ export default function App() {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('select')
-  const [items, setItems] = useState([
-    {label: 'Select a College', value: 'select'},
-    {label: colleges[0].name, value: colleges[0].value},
-    {label: colleges[1].name, value: colleges[1].value},
-    {label: colleges[2].name, value: colleges[2].value},
-    {label: colleges[3].name, value: colleges[3].value},
-  ]);
+  // const [items, setItems] = useState(colleges);
 
+  let setOpenUpdate = () => {
+    
+    if (open==false){
+      setOpen(true)
+      updateColleges('collegeList')
+      setColleges(valueT)
+      // setValue(colleges[0].value)
+    }
+    else{
+      setOpen(false)
+    }
+  };
+
+  let listOneThruTen = [{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'}];
 
   const [openMenu, setOpenMenu] = useState(false);
   const [valueMenu, setValueMenu] = useState('home')
@@ -210,70 +295,70 @@ export default function App() {
   
   const [openS1, setOpenS1] = useState(false);
   const [valueS1, setValueS1] = useState('0')
-  const [itemsS1, setItemsS1] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [itemsS1, setItemsS1] = useState(listOneThruTen);
 
   const [openS2, setOpenS2] = useState(false);
   const [valueS2, setValueS2] = useState('0')
-  const [itemsS2, setItemsS2] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
+  const [itemsS2, setItemsS2] = useState(listOneThruTen);
 
   const [openS3, setOpenS3] = useState(false);
   const [valueS3, setValueS3] = useState('0')
-  const [itemsS3, setItemsS3] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsS3, setItemsS3] = useState(listOneThruTen);
+  
   const [openS4, setOpenS4] = useState(false);
   const [valueS4, setValueS4] = useState('0')
-  const [itemsS4, setItemsS4] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsS4, setItemsS4] = useState(listOneThruTen);
+  
   const [openS5, setOpenS5] = useState(false);
   const [valueS5, setValueS5] = useState('0')
-  const [itemsS5, setItemsS5] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsS5, setItemsS5] = useState(listOneThruTen);
+  
   const [openS6, setOpenS6] = useState(false);
   const [valueS6, setValueS6] = useState('0')
-  const [itemsS6, setItemsS6] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsS6, setItemsS6] = useState(listOneThruTen);
+  
   const [openS7, setOpenS7] = useState(false);
   const [valueS7, setValueS7] = useState('0')
-  const [itemsS7, setItemsS7] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsS7, setItemsS7] = useState(listOneThruTen);
+  
   const [openS8, setOpenS8] = useState(false);
   const [valueS8, setValueS8] = useState('0')
-  const [itemsS8, setItemsS8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsS8, setItemsS8] = useState(listOneThruTen);
+  
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [openM1, setOpenM1] = useState(false);
   const [valueM1, setValueM1] = useState('0')
-  const [itemsM1, setItemsM1] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM1, setItemsM1] = useState(listOneThruTen);
+  
   const [openM2, setOpenM2] = useState(false);
   const [valueM2, setValueM2] = useState('0')
-  const [itemsM2, setItemsM2] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM2, setItemsM2] = useState(listOneThruTen);
+  
   const [openM3, setOpenM3] = useState(false);
   const [valueM3, setValueM3] = useState('0')
-  const [itemsM3, setItemsM3] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM3, setItemsM3] = useState(listOneThruTen);
+  
   const [openM4, setOpenM4] = useState(false);
   const [valueM4, setValueM4] = useState('0')
-  const [itemsM4, setItemsM4] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM4, setItemsM4] = useState(listOneThruTen);
+  
   const [openM5, setOpenM5] = useState(false);
   const [valueM5, setValueM5] = useState('0')
-  const [itemsM5, setItemsM5] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM5, setItemsM5] = useState(listOneThruTen);
+  
   const [openM6, setOpenM6] = useState(false);
   const [valueM6, setValueM6] = useState('0')
-  const [itemsM6, setItemsM6] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM6, setItemsM6] = useState(listOneThruTen);
+  
   const [openM7, setOpenM7] = useState(false);
   const [valueM7, setValueM7] = useState('0')
-  const [itemsM7, setItemsM7] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM7, setItemsM7] = useState(listOneThruTen);
+  
   const [openM8, setOpenM8] = useState(false);
   const [valueM8, setValueM8] = useState('0')
-  const [itemsM8, setItemsM8] = useState([{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'},]);
-
+  const [itemsM8, setItemsM8] = useState(listOneThruTen);
+  
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -287,14 +372,14 @@ export default function App() {
   ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
 
   let weights = [
-    {weight: valueS1},
-    {weight: valueS2},
-    {weight: valueS3},
-    {weight: valueS4},
-    {weight: valueS5},
-    {weight: valueS6},
-    {weight: valueS7},
-    {weight: valueS8},
+    {weight: valueS1, id: uuid.v4()},
+    {weight: valueS2, id: uuid.v4()},
+    {weight: valueS3, id: uuid.v4()},
+    {weight: valueS4, id: uuid.v4()},
+    {weight: valueS5, id: uuid.v4()},
+    {weight: valueS6, id: uuid.v4()},
+    {weight: valueS7, id: uuid.v4()},
+    {weight: valueS8, id: uuid.v4()},
     
   ];
 
@@ -319,11 +404,11 @@ export default function App() {
           <DropDownPicker
             open = {open}
             value = {value}
-            items = {items}
+            items = {colleges}
             // setOpen = {setOpenBypass}
-            setOpen = {setOpen}
+            setOpen = {setOpenUpdate}
             setValue = {setValue}
-            setItems = {setItems}
+            setItems = {setColleges}
 
             onChangeValue={(value) => {
               setValueMenu('home')
@@ -382,8 +467,11 @@ export default function App() {
                       textAlign: 'center',
                       justifyContent: 'center',
                       alignItems: 'center',
+                      color: 'white',
                     }}
                     keyboardAppearance='dark'
+                    autoCorrect = {false}
+                    autoCapitalize = 'words'
                     onChangeText={setText}
                     value={text}
                     placeholder="Enter college name"
@@ -434,11 +522,31 @@ export default function App() {
           <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
             <Image source={hamburgerIcon} style={{height: taskbarHeight, width: iconWidth}}/>
           </TouchableOpacity>
+
+          {/* <TouchableOpacity onPress={() => {storeDataJSON('collegeList', colleges), console.log('done')}} style={{position: 'absolute', top: deviceHeightPart*7.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+            <Image source={hamburgerIcon} style={{height: taskbarHeight, width: iconWidth}}/>
+          </TouchableOpacity>
+        
+          <TouchableOpacity onPress={() => {updateColleges('collegeList')}} style={{position: 'absolute', top: deviceHeightPart*7.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+          <View style={{backgroundColor: 'purple'}}><Text>UPDATE VALUET</Text></View>
+            {/* <Image source={{backgroundColor: 'pink'}} style={{height: taskbarHeight, width: iconWidth}}/> 
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges)}} style={{position: 'absolute', top: deviceHeightPart*9.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+            <View style={{backgroundColor: 'purple'}}><Text>RESET COLLEGES</Text></View>
+          </TouchableOpacity> */}
+        
         </View>
 
           <View style={styles.pages}>
 
             <View style={{backgroundColor: '', marginTop: 5}}>{valueMenu=='settings' ? (<>
+
+              <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
+                <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges), updateColleges('collegeList'), Alert.alert('All personalized colleges cleared')}} style={{height: taskbarHeight, width: iconWidth}}>
+                  <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5277/5277847.png' }} style={{height: taskbarHeight, width: iconWidth}}/>
+                </TouchableOpacity>
+              </View>
 
               <ScrollView style={{height: (deviceHeightPart*2)*16}}>
 
@@ -625,16 +733,20 @@ export default function App() {
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
-                <TouchableOpacity onPress={console.log(weights)}><Text>LOG WEIGHTS</Text></TouchableOpacity>
+                {/* <TouchableOpacity onPress={console.log(weights)}><Text>LOG WEIGHTS</Text></TouchableOpacity> */}
                 <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
               </ScrollView>
             </>) : null}</View>
+
+{/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 
             <View>{valueMenu=='myColleges' ? (<>
 
               {/*<Image source={require('./assets/img/collegeIcon.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />*/}
               
-              <View style={{width: deviceWidth, alignItems: 'center', marginTop: 15, position: 'relative',}}>
+              {/* <View style={{width: deviceWidth, alignItems: 'center', marginTop: 15, position: 'relative',}}>
                 <TouchableOpacity onPress={() => {setValueMenu('home'), setValue('ntc')}}>
                   <View style={{borderWidth: 1, backgroundColor: settingsBackgroundColor, justifyContent: 'center', borderRadius: 10, width: deviceWidth-10, height: deviceHeightPart}}>
                     <Text style={{textAlign: 'left', marginLeft: 10}}>NTC</Text>
@@ -646,9 +758,21 @@ export default function App() {
                     <Text style={{textAlign: 'left', marginLeft: 10}}>NTC</Text>
                   </View>
                 </TouchableOpacity>
-              </View>
+              </View> */}
+
+
+              <FlatList
+                data={colleges}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                // extraData={selectedId}
+              />
               
             </>) : null}</View>
+
+{/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
+{/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 
             <View>{valueMenu=='home' ? (<>
               {/*<TouchableOpacity onPress={this.addCollege} style={{width: deviceWidth/2+5}}>
@@ -660,7 +784,7 @@ export default function App() {
               <View style={{}}>{value!='select' ? (<>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: '#0047AB', zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'center', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 15, width: deviceWidth-10, }}>
-                  <View><Text style={{fontSize: deviceHeightPart, shadowOpacity: 100, color: 'gray', fontWeight: 'bold', margin: 5}}>{colleges[colleges.findIndex(e => e.value == value)].name}</Text></View>
+                  <View><Text style={{fontSize: deviceHeightPart, shadowOpacity: 5, color: 'white', fontWeight: 'bold', margin: 5}}>{colleges[colleges.findIndex(e => e.value == value)].label}</Text></View>
                 </View>
                 <ScrollView style={{height: (deviceHeightPart*2)*16}}>
                   <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
@@ -668,12 +792,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS1}
-                        value = {valueS1}
-                        items = {itemsS1}
-                        setOpen = {setOpenS1}
-                        setValue = {setValueS1}
-                        setItems = {setItemsS1}
+                        open = {openM1}
+                        value = {valueM1}
+                        items = {itemsM1}
+                        setOpen = {setOpenM1}
+                        setValue = {setValueM1}
+                        setItems = {setItemsM1}
 
                         closeAfterSelecting = {true}
                         // dropDownContainerStyle={{zIndex: -1}}
@@ -691,12 +815,12 @@ export default function App() {
                     <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[1].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
-                      <DropDownPicker open = {openS2}
-                        value = {valueS2}
-                        items = {itemsS2}
-                        setOpen = {setOpenS2}
-                        setValue = {setValueS2}
-                        setItems = {setItemsS2}
+                      <DropDownPicker open = {openM2}
+                        value = {valueM2}
+                        items = {itemsM2}
+                        setOpen = {setOpenM2}
+                        setValue = {setValueM2}
+                        setItems = {setItemsM2}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -714,12 +838,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS3}
-                        value = {valueS3}
-                        items = {itemsS3}
-                        setOpen = {setOpenS3}
-                        setValue = {setValueS3}
-                        setItems = {setItemsS3}
+                        open = {openM3}
+                        value = {valueM3}
+                        items = {itemsM3}
+                        setOpen = {setOpenM3}
+                        setValue = {setValueM3}
+                        setItems = {setItemsM3}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -737,12 +861,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS4}
-                        value = {valueS4}
-                        items = {itemsS4}
-                        setOpen = {setOpenS4}
-                        setValue = {setValueS4}
-                        setItems = {setItemsS4}
+                        open = {openM4}
+                        value = {valueM4}
+                        items = {itemsM4}
+                        setOpen = {setOpenM4}
+                        setValue = {setValueM4}
+                        setItems = {setItemsM4}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -760,12 +884,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS5}
-                        value = {valueS5}
-                        items = {itemsS5}
-                        setOpen = {setOpenS5}
-                        setValue = {setValueS5}
-                        setItems = {setItemsS5}
+                        open = {openM5}
+                        value = {valueM5}
+                        items = {itemsM5}
+                        setOpen = {setOpenM5}
+                        setValue = {setValueM5}
+                        setItems = {setItemsM5}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -783,12 +907,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS6}
-                        value = {valueS6}
-                        items = {itemsS6}
-                        setOpen = {setOpenS6}
-                        setValue = {setValueS6}
-                        setItems = {setItemsS6}
+                        open = {openM6}
+                        value = {valueM6}
+                        items = {itemsM6}
+                        setOpen = {setOpenM6}
+                        setValue = {setValueM6}
+                        setItems = {setItemsM6}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -806,12 +930,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS7}
-                        value = {valueS7}
-                        items = {itemsS7}
-                        setOpen = {setOpenS7}
-                        setValue = {setValueS7}
-                        setItems = {setItemsS7}
+                        open = {openM7}
+                        value = {valueM7}
+                        items = {itemsM7}
+                        setOpen = {setOpenM7}
+                        setValue = {setValueM7}
+                        setItems = {setItemsM7}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -829,12 +953,12 @@ export default function App() {
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
-                        open = {openS8}
-                        value = {valueS8}
-                        items = {itemsS8}
-                        setOpen = {setOpenS8}
-                        setValue = {setValueS8}
-                        setItems = {setItemsS8}
+                        open = {openM8}
+                        value = {valueM8}
+                        items = {itemsM8}
+                        setOpen = {setOpenM8}
+                        setValue = {setValueM8}
+                        setItems = {setItemsM8}
 
                         closeAfterSelecting = {true}
                         showBadgeDot = {false}
@@ -855,7 +979,7 @@ export default function App() {
               
             </>) : null}</View>
           </View>
-
+ 
           <View style={styles.colleges}>
             <View>{value=='madison' ? (<>
 
