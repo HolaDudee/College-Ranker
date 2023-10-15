@@ -55,6 +55,30 @@ export default function App() {
     updateRatingsL(ratingKey)
   };
 
+  let getRating = (ratingKey) => {
+    getRatings(ratingKey)
+    let ratings = ratingsL
+    let total = 0
+    console.log(weights)
+    for (let i = 0; i<ratings.length; i = i + 1){
+      total = total + (ratings[i]/10)*ratings[i]
+      console.log()
+      console.log('i - '+i)
+      console.log()
+      console.log('ratings[i] - ')
+      console.log(ratings[i])
+      console.log()
+      console.log('weight[i].weight - ')
+      console.log(weights[i].weight)
+      console.log()
+    }
+    console.log()
+    console.log('total - ')
+    console.log(total)
+    console.log(weights)
+
+  };
+
   const updateRatingsL = async (key) => {
     try {
       const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
@@ -98,7 +122,7 @@ export default function App() {
   // };
 
   let initColleges = [
-    {label: 'Select a College', value: 'select', ratingKey: 'ratingKey0',key: uuid.v4()},
+    {label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()},
     {label: 'UW - Madison', value: 'madison', ratingKey: 'ratingKey1', key: uuid.v4()},
     {label: 'UW - La Crosse', value: 'laCrosse', ratingKey: 'ratingKey2', key: uuid.v4()},
     {label: 'UW - Stevens Point', value: 'stevensPoint', ratingKey: 'ratingKey3', key: uuid.v4()},
@@ -201,16 +225,27 @@ export default function App() {
   let removeValueCollage = (index) => {
     let newArr = valueT
     newArr.splice(index+1, 1)
-    console.log(newArr)
+
+    // console.log()
+    // console.log('index - ')
+    // console.log(index)
+    // console.log()
+
+    // console.log(newArr)
     storeDataJSON('collegeList', newArr)
     updateColleges('collegeList')
-    console.log(valueT)
+    // console.log(valueT)
   };
 
   let addCollege = (nameI, valueI) => {
     // setValueT()
     // let cushbear = [initColleges]
-    const newList = valueT.concat({label: nameI, value: valueI, rating: {}, key: uuid.v4()});
+    // ratingKey: 'ratingKey0',
+    const newList = valueT.concat({label: nameI, value: valueI, ratingKey: 'ratingKey'+valueT.length, key: uuid.v4()});
+    // console.log()
+    // console.log('valueT.length - ')
+    // console.log(valueT.length)
+    // console.log()
     setValueT(newList)
     // let cushbear = [current => [...current, {label: nameI, value: valueI, rating: {}}]]
     // console.log(cushbear)
@@ -421,15 +456,7 @@ export default function App() {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [modalVisible, setModalVisible] = useState(false);
-
-  const [text, setText] = useState();
-
-  let ratings = [
-    // [{rating: valueS1}, {rating: valueS2}, {rating: valueS3}, {rating: valueS4}, {rating: valueS5}, {rating: valueS6}, {rating: valueS7}, {rating: valueS8}],
-    // [{}]
-  ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
-
-  let weights = [
+  const [weights, setWeights] = useState([
     {weight: valueS1, key: uuid.v4()},
     {weight: valueS2, key: uuid.v4()},
     {weight: valueS3, key: uuid.v4()},
@@ -438,8 +465,14 @@ export default function App() {
     {weight: valueS6, key: uuid.v4()},
     {weight: valueS7, key: uuid.v4()},
     {weight: valueS8, key: uuid.v4()},
-    
-  ];
+  ])
+  const [text, setText] = useState();
+
+  let ratings = [
+    // [{rating: valueS1}, {rating: valueS2}, {rating: valueS3}, {rating: valueS4}, {rating: valueS5}, {rating: valueS6}, {rating: valueS7}, {rating: valueS8}],
+    // [{}]
+  ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
+
 
   const sortedRatings = [].concat(ratings)
     .sort((a, b) => a.rating > b.rating ? 1 : -1)
@@ -922,7 +955,7 @@ export default function App() {
 
 
                     <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => {console.log(ratingsL[0].value)}}><Text>LOG IT</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => {console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
                   </View>
                 }
                 // keyExtractor={(item) => item.key}
