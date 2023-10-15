@@ -192,10 +192,20 @@ export default function App() {
 
   const [factors, setFactors] = useState(initFactors)
   const [colleges, setColleges] = useState(valueT)
+  const [deleteMenuVis, setDeleteMenuVis] = useState(false)
 
   // const [settings, setSettings] = useState('none')
   // const [mainDisplay, setMainDisplay] = useState('block')
   // const [myColleges, setMyColleges] = useState('none')
+
+  let removeValueCollage = (index) => {
+    let newArr = valueT
+    newArr.splice(index+1, 1)
+    console.log(newArr)
+    storeDataJSON('collegeList', newArr)
+    updateColleges('collegeList')
+    console.log(valueT)
+  };
 
   let addCollege = (nameI, valueI) => {
     // setValueT()
@@ -292,6 +302,7 @@ export default function App() {
   let settingsWhite = require('./assets/img/settingsGearWheelWhite.png');
   let hamburgerIcon = require('./assets/img/hamburgerMenuIcon.png');
   let plusIcon = require('./assets/img/plusIcon.png');
+  let deleteMenuIcon = require('./assets/img/deleteMenu.png')
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -622,11 +633,59 @@ export default function App() {
 
             <View style={{backgroundColor: '', marginTop: 5}}>{valueMenu=='settings' ? (<>
 
-              <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
+              {/* <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
                 <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges), updateColleges('collegeList'), Alert.alert('All personalized colleges cleared')}} style={{height: taskbarHeight, width: iconWidth}}>
                   <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5277/5277847.png' }} style={{height: taskbarHeight, width: iconWidth}}/>
                 </TouchableOpacity>
+              </View> */}
+
+              <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
+                <TouchableOpacity onPress={() => {setDeleteMenuVis(!deleteMenuVis)}} style={{height: taskbarHeight, width: iconWidth}}>
+                  <Image source={deleteMenuIcon} style={{height: taskbarHeight, width: iconWidth}}/>
+                </TouchableOpacity>
               </View>
+
+              <Modal
+                transparent={false}
+                visible={deleteMenuVis}
+                animationType='slide'
+                style={{}}
+                >
+                  <SafeAreaView style={{backgroundColor: '#2c2b2b'}}>
+
+                    <View style={{alignItems: 'flex-end', width: deviceWidth}}>
+                      <TouchableOpacity style={{margin: 5}} onPress={() => {setDeleteMenuVis(!deleteMenuVis)}}>{/*</TouchableOpacity></SafeAreaView>, Alert.alert('Modal Closed'), console.log('Modal Closed')}}>*/}
+                        <View style={{height: deviceHeightPart, width: deviceHeightPart, margin: 2, borderWidth: 1, borderRadius: 5, backgroundColor: iconColor, textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
+                          <Text style={{fontSize: deviceHeightPart-10, margin: 0}}>X</Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+
+                    {/* <View style={{width: deviceWidth-10, marginLeft: 5, backgroundColor: 'gray', borderRadius: 10}}> */}
+                    {/* <Text style={{}}>This exists, right?</Text> */}
+                    <FlatList 
+                      data={valueT.slice(1)}
+                      renderItem={({ item, index }) => 
+                        <View style={{backgroundColor: color, alignItems: 'center', justifyContent: 'space-between', height: deviceHeightPart*1.5, flexDirection: 'row', marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 15}}>
+                          <Text style={{fontSize: 24, marginLeft: 3.5}}>{item.label}</Text>
+                          <Text>{index}</Text>
+                          {/* <View style={{flexDirection: 'column'}}><View style={{alignSelf: 'flex-end'}}><Text>HELLO</Text></View></View> */}
+                          <TouchableOpacity onPress={() => {removeValueCollage(index)}}>
+                            <View style={{backgroundColor: 'red', textAlign: 'center', marginRight: 5, alignItems: 'center', justifyContent: 'center', height: deviceHeightPart, width: deviceHeightPart, borderWidth: 1, borderRadius: 25}}>
+                              <Text>-</Text>
+                            </View>
+                          </TouchableOpacity>
+                        </View>
+                      }
+                      // keyExtractor={(item) => item.key}
+                    />
+                    {/* </View> */}
+
+
+                    <View style={{width: deviceWidth, height: deviceHeightPart*22.5}}></View>
+
+                  </SafeAreaView>
+                </Modal>
 
               <ScrollView style={{height: (deviceHeightPart*2)*16}}>
 
@@ -823,9 +882,9 @@ export default function App() {
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
             <View>{valueMenu=='myColleges' ? (<>
 
-              <TouchableOpacity onPress={() => {addRating('ratingKey4', blankRating), console.log('rating added')}} style={{position: '', top: 0, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
+              {/* <TouchableOpacity onPress={() => {addRating('ratingKey4', blankRating), console.log('rating added')}} style={{position: '', top: 0, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
                 <View style={{height: taskbarHeight, width: iconWidth, backgroundColor: 'red'}}/>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
           
               {/*<Image source={require('./assets/img/collegeIcon.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />*/}
               
@@ -855,7 +914,6 @@ export default function App() {
                 renderSectionHeader={({section}) => <H1 title={section.title} />} // Your date component here.
                 sections={valueT[0]}
               /> */}
-
               <FlatList 
                 data={valueT.slice(1)}
                 renderItem={({ item }) => 
