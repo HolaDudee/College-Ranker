@@ -701,7 +701,7 @@ export default function App() {
                       renderItem={({ item, index }) => 
                         <View style={{backgroundColor: color, alignItems: 'center', justifyContent: 'space-between', height: deviceHeightPart*1.5, flexDirection: 'row', marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 15}}>
                           <Text style={{fontSize: 24, marginLeft: 3.5}}>{item.label}</Text>
-                          <Text>{index}</Text>
+                          {/* <Text>{index}</Text> */}
                           {/* <View style={{flexDirection: 'column'}}><View style={{alignSelf: 'flex-end'}}><Text>HELLO</Text></View></View> */}
                           <TouchableOpacity onPress={() => {removeValueCollage(index)}}>
                             <View style={{backgroundColor: 'red', textAlign: 'center', marginRight: 5, alignItems: 'center', justifyContent: 'center', height: deviceHeightPart, width: deviceHeightPart, borderWidth: 1, borderRadius: 25}}>
