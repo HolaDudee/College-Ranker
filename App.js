@@ -57,25 +57,34 @@ export default function App() {
 
   let getRating = (ratingKey) => {
     getRatings(ratingKey)
+    updateWeights()
     let ratings = ratingsL
     let total = 0
     console.log(weights)
     for (let i = 0; i<ratings.length; i = i + 1){
-      total = total + (ratings[i]/10)*ratings[i]
+      total = total + ((ratings[i].value)*(weights[i].weight/10))
       console.log()
       console.log('i - '+i)
       console.log()
-      console.log('ratings[i] - ')
-      console.log(ratings[i])
+      console.log('ratings[i].value - ')
+      console.log(ratings[i].value)
       console.log()
       console.log('weight[i].weight - ')
       console.log(weights[i].weight)
+      console.log()
+      console.log('total - ')
+      console.log(total)
       console.log()
     }
     console.log()
     console.log('total - ')
     console.log(total)
+    console.log()
+    console.log('weights - ')
     console.log(weights)
+    console.log()
+    console.log('weights[0] - ')
+    console.log(weights[0].weight)
 
   };
 
@@ -332,6 +341,20 @@ export default function App() {
     setOpen(false)
   };
 
+  let updateWeights = () => {
+    setWeights([
+      {weight: valueS1, key: uuid.v4()},
+      {weight: valueS2, key: uuid.v4()},
+      {weight: valueS3, key: uuid.v4()},
+      {weight: valueS4, key: uuid.v4()},
+      {weight: valueS5, key: uuid.v4()},
+      {weight: valueS6, key: uuid.v4()},
+      {weight: valueS7, key: uuid.v4()},
+      {weight: valueS8, key: uuid.v4()},
+    ])
+    storeDataJSON('weights', weights)
+  };
+
   let homeWhite = require('./assets/img/homeIconV2White.png');
   let collegeWhite = require('./assets/img/collegeIconWhite.png');
   let settingsWhite = require('./assets/img/settingsGearWheelWhite.png');
@@ -374,7 +397,7 @@ export default function App() {
     }
   };
 
-  let listOneThruTen = [{label: '0', value: '0'},{label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},{label: '6', value: '6'},{label: '7', value: '7'},{label: '8', value: '8'},{label: '9', value: '9'},{label: '10', value: '10'}];
+  let listOneThruTen = [{label: '0', value: 0},{label: '1', value: 1},{label: '2', value: 2},{label: '3', value: 3},{label: '4', value: 4},{label: '5', value: 5},{label: '6', value: 6},{label: '7', value: 7},{label: '8', value: 8},{label: '9', value: 9},{label: '10', value: 10}];
 
   const [openMenu, setOpenMenu] = useState(false);
   const [valueMenu, setValueMenu] = useState('home')
@@ -387,69 +410,69 @@ export default function App() {
   ]);
   
   const [openS1, setOpenS1] = useState(false);
-  const [valueS1, setValueS1] = useState('0')
+  const [valueS1, setValueS1] = useState(0)
   const [itemsS1, setItemsS1] = useState(listOneThruTen);
 
   const [openS2, setOpenS2] = useState(false);
-  const [valueS2, setValueS2] = useState('0')
+  const [valueS2, setValueS2] = useState(0)
   const [itemsS2, setItemsS2] = useState(listOneThruTen);
 
   const [openS3, setOpenS3] = useState(false);
-  const [valueS3, setValueS3] = useState('0')
+  const [valueS3, setValueS3] = useState(0)
   const [itemsS3, setItemsS3] = useState(listOneThruTen);
   
   const [openS4, setOpenS4] = useState(false);
-  const [valueS4, setValueS4] = useState('0')
+  const [valueS4, setValueS4] = useState(0)
   const [itemsS4, setItemsS4] = useState(listOneThruTen);
   
   const [openS5, setOpenS5] = useState(false);
-  const [valueS5, setValueS5] = useState('0')
+  const [valueS5, setValueS5] = useState(0)
   const [itemsS5, setItemsS5] = useState(listOneThruTen);
   
   const [openS6, setOpenS6] = useState(false);
-  const [valueS6, setValueS6] = useState('0')
+  const [valueS6, setValueS6] = useState(0)
   const [itemsS6, setItemsS6] = useState(listOneThruTen);
   
   const [openS7, setOpenS7] = useState(false);
-  const [valueS7, setValueS7] = useState('0')
+  const [valueS7, setValueS7] = useState(0)
   const [itemsS7, setItemsS7] = useState(listOneThruTen);
   
   const [openS8, setOpenS8] = useState(false);
-  const [valueS8, setValueS8] = useState('0')
+  const [valueS8, setValueS8] = useState(0)
   const [itemsS8, setItemsS8] = useState(listOneThruTen);
   
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [openM1, setOpenM1] = useState(false);
-  const [valueM1, setValueM1] = useState('0')
+  const [valueM1, setValueM1] = useState(0)
   const [itemsM1, setItemsM1] = useState(listOneThruTen);
   
   const [openM2, setOpenM2] = useState(false);
-  const [valueM2, setValueM2] = useState('0')
+  const [valueM2, setValueM2] = useState(0)
   const [itemsM2, setItemsM2] = useState(listOneThruTen);
   
   const [openM3, setOpenM3] = useState(false);
-  const [valueM3, setValueM3] = useState('0')
+  const [valueM3, setValueM3] = useState(0)
   const [itemsM3, setItemsM3] = useState(listOneThruTen);
   
   const [openM4, setOpenM4] = useState(false);
-  const [valueM4, setValueM4] = useState('0')
+  const [valueM4, setValueM4] = useState(0)
   const [itemsM4, setItemsM4] = useState(listOneThruTen);
   
   const [openM5, setOpenM5] = useState(false);
-  const [valueM5, setValueM5] = useState('0')
+  const [valueM5, setValueM5] = useState(0)
   const [itemsM5, setItemsM5] = useState(listOneThruTen);
   
   const [openM6, setOpenM6] = useState(false);
-  const [valueM6, setValueM6] = useState('0')
+  const [valueM6, setValueM6] = useState(0)
   const [itemsM6, setItemsM6] = useState(listOneThruTen);
   
   const [openM7, setOpenM7] = useState(false);
-  const [valueM7, setValueM7] = useState('0')
+  const [valueM7, setValueM7] = useState(0)
   const [itemsM7, setItemsM7] = useState(listOneThruTen);
   
   const [openM8, setOpenM8] = useState(false);
-  const [valueM8, setValueM8] = useState('0')
+  const [valueM8, setValueM8] = useState(0)
   const [itemsM8, setItemsM8] = useState(listOneThruTen);
   
 
@@ -905,7 +928,7 @@ export default function App() {
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
-                {/* <TouchableOpacity onPress={console.log(weights)}><Text>LOG WEIGHTS</Text></TouchableOpacity> */}
+                <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity>
                 <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
               </ScrollView>
             </>) : null}</View>
