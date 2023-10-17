@@ -534,9 +534,9 @@ export default function App() {
               console.log()
               console.log('rKey - ')
               console.log(rKey)
-              addRating(rKey, newArray)
+              addRating(rKey, newArray).then(updateRatingsL(rKey))
               console.log()
-              updateRatingsL(rKey)
+              // updateRatingsL(rKey)
               console.log('ratingsL - ')
               console.log(ratingsL)
             }}
