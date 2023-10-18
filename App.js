@@ -228,8 +228,36 @@ export default function App() {
   //   storeDataJSON('weights', weights)
   // };
 
-  let updateWeights = () => {
-    setWeights([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8]).then(storeDataJSON('weights', weights))
+  let setNewWeights = () => {
+    setWeights([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8])
+    storeDataJSON('weights', weights).then(Alert.alert('Weight Save Successful'))
+  };
+
+  let setViewedWeights = () => {
+    updateWeights().then(() => {
+      console.log(weights)
+      setValueS1(weights[0])
+      setValueS2(weights[1])
+      setValueS3(weights[2])
+      setValueS4(weights[3])
+      setValueS5(weights[4])
+      setValueS6(weights[5])
+      setValueS7(weights[6])
+      setValueS8(weights[7])
+    })
+  };
+
+  const updateWeights = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('weights');
+      const value = JSON.parse(jsonValue);
+      if (value!=null){
+        setWeights(value)
+        return value
+      }
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   let homeWhite = require('./assets/img/homeIconV2White.png');
@@ -354,16 +382,7 @@ export default function App() {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [weights, setWeights] = useState([
-    {weight: valueS1, key: uuid.v4()},
-    {weight: valueS2, key: uuid.v4()},
-    {weight: valueS3, key: uuid.v4()},
-    {weight: valueS4, key: uuid.v4()},
-    {weight: valueS5, key: uuid.v4()},
-    {weight: valueS6, key: uuid.v4()},
-    {weight: valueS7, key: uuid.v4()},
-    {weight: valueS8, key: uuid.v4()},
-  ])
+  const [weights, setWeights] = useState([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8])
   const [text, setText] = useState();
 
   // let ratings = [
@@ -488,6 +507,10 @@ export default function App() {
             setOpen={setOpenMenu}
             setValue={setValueMenu}
             setItems={setItemsMenu}
+
+            onChangeValue={(value) => {
+              setViewedWeights()
+            }}
             
             closeAfterSelecting={true}
             textStyle={{fontSize: 30}}
@@ -514,7 +537,8 @@ export default function App() {
 
           <View>{valueMenu=='devMenu' ? (<>
             <View style={{width: deviceWidth, textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}><Text style={{color: 'white', shadowOpacity: 100, margin: 15, fontSize: 24}}>Welcome to the Dev Menu</Text></View>
-
+            <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart, zIndex: -100}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => {setViewedWeights()}}><Text>setViewedWeights</Text></TouchableOpacity>
 
 
           </>) : null}</View>
@@ -763,7 +787,8 @@ export default function App() {
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
-                <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart, zIndex: -100}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity>
+                {/* <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart, zIndex: -100}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity> */}
+                <TouchableOpacity onPress={() => {setNewWeights()}}><View style={{backgroundColor: littleSection, height: deviceHeightPart, width: deviceWidth/3, marginLeft: deviceWidth/3, justifyContent: 'center', alignText: 'center', alignItems: 'center', borderWidth: 1, borderRadius: 15}}><Text>Save</Text></View></TouchableOpacity>
                 <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
               </ScrollView>
             </>) : null}</View>
