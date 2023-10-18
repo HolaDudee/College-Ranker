@@ -119,14 +119,14 @@ export default function App() {
   
   
   let initFactors = [
-    {name: 'SOMETHING1', value: 'something1', key: uuid.v4()},
-    {name: 'SOMETHING2', value: 'something2', key: uuid.v4()},
-    {name: 'SOMETHING3', value: 'something3', key: uuid.v4()},
-    {name: 'SOMETHING4', value: 'something4', key: uuid.v4()},
-    {name: 'SOMETHING5', value: 'something5', key: uuid.v4()},
-    {name: 'SOMETHING6', value: 'something6', key: uuid.v4()},
-    {name: 'SOMETHING7', value: 'something7', key: uuid.v4()},
-    {name: 'SOMETHING8', value: 'something8', key: uuid.v4()},
+    {name: 'Size of College', value: 'f1', key: uuid.v4()},
+    {name: 'Location of College', value: 'f2', key: uuid.v4()},
+    {name: 'Programs', value: 'f3', key: uuid.v4()},
+    {name: 'Housing', value: 'f4', key: uuid.v4()},
+    {name: 'Student Life', value: 'f5', key: uuid.v4()},
+    {name: 'Prestige', value: 'f6', key: uuid.v4()},
+    {name: 'Cost', value: 'f7', key: uuid.v4()},
+    {name: 'Research', value: 'f8', key: uuid.v4()},
   ];
   
   const storeDataJSON = async (key, valueE) => {
@@ -180,7 +180,7 @@ export default function App() {
   };
 
   let addCollege = (nameI, valueI) => {
-    const newList = valueT.concat({label: nameI, value: valueI, ratingKey: 'ratingKey'+valueT.length, key: uuid.v4()});
+    const newList = valueT.concat({label: nameI, value: valueI, ratingKey: 'ratingKey'+valueI, key: uuid.v4()});
     setValueT(newList)
     storeDataJSON('collegeList', newList)
     updateColleges('collegeList')
@@ -276,6 +276,39 @@ export default function App() {
       console.log(e)
     }
   };
+
+  let onCollegesValueChange = (value) => {
+    setValueMenu('home')
+    let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
+    console.log('newArray - ')
+    console.log(newArray)
+    let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
+    console.log()
+    console.log('rKey - ')
+    console.log(rKey)
+    addRating(rKey, newArray).then(updateRatingsL(rKey))
+    console.log()
+    // updateRatingsL(rKey)
+    console.log('ratingsL - ')
+    console.log(ratingsL)
+  }
+
+//  let onCollegesValueChange = (value) => {
+//   setValueMenu('home')
+//   let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
+//   console.log('newArray - ')
+//   console.log(newArray)
+//   let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
+//   console.log()
+//   console.log('rKey - ')
+//   console.log(rKey)
+//   addRating(rKey, newArray).then(updateRatingsL(rKey))
+//   console.log()
+//   // updateRatingsL(rKey)
+//   console.log('ratingsL - ')
+//   console.log(ratingsL)
+// }
+
 
   setOpenMenuToggle = () => {
     setOpenMenu(true)
@@ -443,20 +476,8 @@ export default function App() {
             setValue = {setValue}
             setItems = {setColleges}
 
-            onChangeValue={(value) => {
-              setValueMenu('home')
-              let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
-              console.log('newArray - ')
-              console.log(newArray)
-              let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
-              console.log()
-              console.log('rKey - ')
-              console.log(rKey)
-              addRating(rKey, newArray).then(updateRatingsL(rKey))
-              console.log()
-              // updateRatingsL(rKey)
-              console.log('ratingsL - ')
-              console.log(ratingsL)
+            onChangeValue={(changeValue) => {
+              onCollegesValueChange(changeValue)
             }}
             closeAfterSelecting = {true}
             showBadgeDot = {false}
@@ -875,6 +896,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -897,6 +919,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -920,6 +943,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -943,6 +967,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -966,6 +991,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -989,6 +1015,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -1012,6 +1039,7 @@ export default function App() {
                         searchable = {false}
                         mode = "BADGE"
                         listMode="SCROLLVIEW"
+                        dropDownDirection="BOTTOM"
 
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
@@ -1041,7 +1069,7 @@ export default function App() {
                     </View>
                   </View>
                   {/* <TouchableHighlight onPress={() => setFactors(initFactors)}><Text>RESET FACTORS</Text></TouchableHighlight> */}
-                  <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
+                  <View style={{zIndex: -100000, height: deviceHeightPart*25, justifyContent: 'flex-end',}}></View>
                   </ScrollView>
                 </>) : null}</View>
 

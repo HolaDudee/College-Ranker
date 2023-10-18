@@ -1,0 +1,79 @@
+{
+	"files": [
+		{
+			"path": "App.js",
+			"bookmarks": [
+				{
+					"line": 27,
+					"column": 0,
+					"label": "variables"
+				},
+				{
+					"line": 86,
+					"column": 0,
+					"label": "ratingsFuncs"
+				},
+				{
+					"line": 118,
+					"column": 2,
+					"label": "initArrs"
+				},
+				{
+					"line": 187,
+					"column": 0,
+					"label": "collegeFuncs"
+				},
+				{
+					"line": 246,
+					"column": 0,
+					"label": "weightFuncs"
+				},
+				{
+					"line": 278,
+					"column": 0,
+					"label": "collegeFuncs"
+				},
+				{
+					"line": 324,
+					"column": 0,
+					"label": "photoVariables"
+				},
+				{
+					"line": 476,
+					"column": 0,
+					"label": "collegesDropDown"
+				},
+				{
+					"line": 499,
+					"column": 13,
+					"label": "collegeModal"
+				},
+				{
+					"line": 553,
+					"column": 0,
+					"label": "menuDropDown"
+				},
+				{
+					"line": 586,
+					"column": 0,
+					"label": "devMenu"
+				},
+				{
+					"line": 616,
+					"column": 17,
+					"label": "collegeDeletionModal"
+				},
+				{
+					"line": 848,
+					"column": 0,
+					"label": "myColleges"
+				},
+				{
+					"line": 1107,
+					"column": 0,
+					"label": "stylesheet"
+				}
+			]
+		}
+	]
+}
