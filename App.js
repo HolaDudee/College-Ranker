@@ -21,16 +21,20 @@ let deviceHeight = Dimensions.get('window').height;
 let deviceHeightPart = deviceHeight/24;
 let deviceWidth = Dimensions.get('window').width;
 let ff = "Avenir";
-let color = "#8186B6";
+let color = "#16182d";
 // let settingsBackgroundColor = '#fb6767';
 // let settingsBackgroundColor = '#3A3B3C';
 let settingsBackgroundColor = color;
+let sectionBackgroundColor = '#252944';
+let littleSection = '#3b3e5d';
 
 let taskbarHeight = deviceHeightPart*1.5;
 let iconWidth = taskbarHeight;
 let iconBackgroundWidth = iconWidth*1.2;
 let iconBackgroundHeight = taskbarHeight*1.2;
-let iconColor = '#A5FFB3';
+let iconColor = '#47e7a9';
+let colorOfText = '#fdfeff';
+
 
 // const Item = ({label}) => (
 //   <View style={{backgroundColor: 'purple', height: deviceHeightPart, width: deviceWidth-10}}>
@@ -512,11 +516,11 @@ export default function App() {
       <View style={styles.container}>
         <View style={{backgroundColor: color, position:'absolute', top:0, left:0, width: deviceWidth, height:deviceHeightPart*1.5}}></View>
         <SafeAreaView>
-        
-        <View style={styles.topMargin}>
-          <Text style={{fontSize: 24, fontFamily: ff, marginBottom: 0, fontWeight: 'bold', color: '#3A3B3C'}}>College Ranker</Text>
+        <View style={{overflow: 'hidden', paddingBottom: 5}}>
+          <View style={styles.topMargin}>
+            <Text style={{fontSize: 24, fontFamily: ff, marginBottom: 0, fontWeight: 'bold', color: colorOfText, shadowOpacity: 0.5}}>College Ranker</Text>
+          </View>
         </View>
-
         <View style={styles.topTaskbar}>
           <DropDownPicker
             open = {open}
@@ -558,7 +562,7 @@ export default function App() {
             listMode = "MODAL"
             modalAnimationType="slide"
 
-            style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: 0, margin: 5}}/>
+            style={{ width: deviceWidth/2, height: taskbarHeight+10, position: 'absolute', left: 0, top: 0, margin: 5, marginTop: 0}}/>
         </View>
         <View style={{position: 'absolute', top: -deviceHeightPart*3, right: (2*deviceWidth/6)-7.5,}}>{valueMenu=='home' ? (<>
           <View style={{backgroundColor: iconColor, borderWidth: 1, position: 'absolute', top: deviceHeightPart*5.5, right: 0, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, width: iconWidth+10}}></View>
@@ -597,7 +601,7 @@ export default function App() {
                       textAlign: 'center',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      color: 'white',
+                      color: colorOfText,
                     }}
                     keyboardAppearance='dark'
                     autoCorrect = {false}
@@ -605,7 +609,7 @@ export default function App() {
                     onChangeText={setText}
                     value={text}
                     placeholder="Enter college name"
-                    placeholderTextColor='white'
+                    placeholderTextColor={colorOfText}
                     
                   />
                 </View>
@@ -698,7 +702,7 @@ export default function App() {
                 </TouchableOpacity>
               </View> */}
 
-              <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
+              <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 0, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
                 <TouchableOpacity onPress={() => {setDeleteMenuVis(!deleteMenuVis)}} style={{height: taskbarHeight, width: iconWidth}}>
                   <Image source={deleteMenuIcon} style={{height: taskbarHeight, width: iconWidth}}/>
                 </TouchableOpacity>
@@ -710,7 +714,7 @@ export default function App() {
                 animationType='slide'
                 style={{}}
                 >
-                  <SafeAreaView style={{backgroundColor: '#2c2b2b'}}>
+                  <SafeAreaView style={{backgroundColor: color}}>
 
                     <View style={{alignItems: 'flex-end', width: deviceWidth}}>
                       <TouchableOpacity style={{margin: 5}} onPress={() => {setDeleteMenuVis(!deleteMenuVis)}}>{/*</TouchableOpacity></SafeAreaView>, Alert.alert('Modal Closed'), console.log('Modal Closed')}}>*/}
@@ -725,8 +729,8 @@ export default function App() {
                     <FlatList 
                       data={valueT.slice(1)}
                       renderItem={({ item, index }) => 
-                        <View style={{backgroundColor: color, alignItems: 'center', justifyContent: 'space-between', height: deviceHeightPart*1.5, flexDirection: 'row', marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 15}}>
-                          <Text style={{fontSize: 24, marginLeft: 3.5}}>{item.label}</Text>
+                        <View style={{backgroundColor: sectionBackgroundColor, alignItems: 'center', justifyContent: 'space-between', height: deviceHeightPart*1.5, flexDirection: 'row', marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 15}}>
+                          <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
                           {/* <Text>{index}</Text> */}
                           {/* <View style={{flexDirection: 'column'}}><View style={{alignSelf: 'flex-end'}}><Text>HELLO</Text></View></View> */}
                           <TouchableOpacity onPress={() => {removeValueCollage(index)}}>
@@ -748,8 +752,8 @@ export default function App() {
 
               <ScrollView style={{height: (deviceHeightPart*2)*16}}>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[0].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[0].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -766,13 +770,14 @@ export default function App() {
                       searchable = {false}
                       mode = "BADGE"
                       listMode="SCROLLVIEW"
+                      dropDownDirection="BOTTOM"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[1].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -1, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[1].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker open = {openS2}
@@ -788,13 +793,14 @@ export default function App() {
                       searchable = {false}
                       mode = "BADGE"
                       listMode="SCROLLVIEW"
+                      dropDownDirection="BOTTOM"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
               
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[2].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[2].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -810,14 +816,15 @@ export default function App() {
                       theme = "DARK"
                       searchable = {false}
                       mode = "BADGE"
+                      dropDownDirection="BOTTOM"
                       listMode="SCROLLVIEW"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[3].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[3].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -833,14 +840,15 @@ export default function App() {
                       theme = "DARK"
                       searchable = {false}
                       mode = "BADGE"
+                      dropDownDirection="BOTTOM"
                       listMode="SCROLLVIEW"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[4].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[4].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -856,14 +864,15 @@ export default function App() {
                       theme = "DARK"
                       searchable = {false}
                       mode = "BADGE"
+                      dropDownDirection="BOTTOM"
                       listMode="SCROLLVIEW"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[5].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[5].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -880,13 +889,14 @@ export default function App() {
                       searchable = {false}
                       mode = "BADGE"
                       listMode="SCROLLVIEW"
+                      dropDownDirection="BOTTOM"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[6].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[6].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -903,13 +913,14 @@ export default function App() {
                       searchable = {false}
                       mode = "BADGE"
                       listMode="SCROLLVIEW"
+                      dropDownDirection="BOTTOM"
 
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[7].name}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[7].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -931,7 +942,7 @@ export default function App() {
                       style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                   </View>
                 </View>
-                <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity>
+                <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart, zIndex: -100}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity>
                 <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
               </ScrollView>
             </>) : null}</View>
@@ -976,12 +987,13 @@ export default function App() {
               <FlatList 
                 data={valueT.slice(1)}
                 renderItem={({ item }) => 
-                  <View style={{backgroundColor: color, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
-                    <Text style={{fontSize: 24, marginLeft: 3.5}}>{item.label}</Text>
+                  <View style={{backgroundColor: sectionBackgroundColor, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
+                    <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
 
-
-                    <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => {console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
+                    <View style={{alignItems: 'flex-end', justifyContent: 'flex-start', marginTop: -24}}>
+                      <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity>
+                      <TouchableOpacity onPress={() => {console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
+                    </View>
                   </View>
                 }
                 // keyExtractor={(item) => item.key}
@@ -1002,11 +1014,11 @@ export default function App() {
               {/**/}
               <View style={{}}>{value!='select' ? (<>
 
-                <View style={{height: deviceHeightPart*2, backgroundColor: '#0047AB', zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'center', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 15, width: deviceWidth-10, }}>
-                  <View><Text style={{fontSize: deviceHeightPart, shadowOpacity: 5, color: 'white', fontWeight: 'bold', margin: 5}}>{colleges[colleges.findIndex(e => e.value == value)].label}</Text></View>
+                <View style={{height: deviceHeightPart*2, backgroundColor: littleSection, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'center', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 15, width: deviceWidth-10, }}>
+                  <View><Text style={{fontSize: deviceHeightPart, shadowOpacity: 0.5, color: 'white', fontWeight: 'bold', margin: 5}}>{colleges[colleges.findIndex(e => e.value == value)].label}</Text></View>
                 </View>
                 <ScrollView style={{height: (deviceHeightPart*2)*16}}>
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[0].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1030,7 +1042,7 @@ export default function App() {
                     </View>
                   </View>
 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                     <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[1].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1052,7 +1064,7 @@ export default function App() {
                     </View>
                   </View>
                 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[2].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1075,7 +1087,7 @@ export default function App() {
                     </View>
                   </View>
 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[3].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1098,7 +1110,7 @@ export default function App() {
                     </View>
                   </View>
 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[4].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1121,7 +1133,7 @@ export default function App() {
                     </View>
                   </View>
 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[5].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1144,7 +1156,7 @@ export default function App() {
                     </View>
                   </View>
 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[6].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1167,7 +1179,7 @@ export default function App() {
                     </View>
                   </View>
 
-                  <View style={{height: deviceHeightPart*2, backgroundColor: settingsBackgroundColor, zIndex: -8, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
+                  <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -8, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
                   <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[7].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
@@ -1248,7 +1260,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#2B305E',
+    backgroundColor: color,
     // alignItems: 'center',
   },
   colleges: {
@@ -1277,6 +1289,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 24,
     borderRadius: 2,
+
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity:  0.7,
+    shadowRadius: 3,
+    elevation: 5,
   },
   topTaskbar: {
     // flex: 1,
