@@ -214,18 +214,22 @@ export default function App() {
     setOpen(false)
   };
 
+  // let updateWeights = () => {
+  //   setWeights([
+  //     {weight: valueS1, key: uuid.v4()},
+  //     {weight: valueS2, key: uuid.v4()},
+  //     {weight: valueS3, key: uuid.v4()},
+  //     {weight: valueS4, key: uuid.v4()},
+  //     {weight: valueS5, key: uuid.v4()},
+  //     {weight: valueS6, key: uuid.v4()},
+  //     {weight: valueS7, key: uuid.v4()},
+  //     {weight: valueS8, key: uuid.v4()},
+  //   ])
+  //   storeDataJSON('weights', weights)
+  // };
+
   let updateWeights = () => {
-    setWeights([
-      {weight: valueS1, key: uuid.v4()},
-      {weight: valueS2, key: uuid.v4()},
-      {weight: valueS3, key: uuid.v4()},
-      {weight: valueS4, key: uuid.v4()},
-      {weight: valueS5, key: uuid.v4()},
-      {weight: valueS6, key: uuid.v4()},
-      {weight: valueS7, key: uuid.v4()},
-      {weight: valueS8, key: uuid.v4()},
-    ])
-    storeDataJSON('weights', weights)
+    setWeights([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8]).then(storeDataJSON('weights', weights))
   };
 
   let homeWhite = require('./assets/img/homeIconV2White.png');
