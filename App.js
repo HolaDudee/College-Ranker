@@ -628,7 +628,7 @@ export default function App() {
               <ScrollView style={{height: (deviceHeightPart*2)*16}}>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[0].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[0].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -652,7 +652,7 @@ export default function App() {
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -1, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[1].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[1].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker open = {openS2}
@@ -675,7 +675,7 @@ export default function App() {
                 </View>
               
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[2].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[2].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -699,7 +699,7 @@ export default function App() {
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[3].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[3].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -723,7 +723,7 @@ export default function App() {
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[4].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[4].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -747,7 +747,7 @@ export default function App() {
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[5].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[5].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -771,7 +771,7 @@ export default function App() {
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[6].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[6].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -795,7 +795,7 @@ export default function App() {
                 </View>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5, color: colorOfText}}>{factors[7].name}</Text></View>
+                <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[7].name}</Text></View>
                   
                   <View style={styles.topTaskbar}>
                     <DropDownPicker
@@ -818,7 +818,7 @@ export default function App() {
                   </View>
                 </View>
                 {/* <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart, zIndex: -100}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity> */}
-                <TouchableOpacity onPress={() => {setNewWeights()}}><View style={{backgroundColor: littleSection, height: deviceHeightPart, width: deviceWidth/3, marginLeft: deviceWidth/3, justifyContent: 'center', alignText: 'center', alignItems: 'center', borderWidth: 1, borderRadius: 15}}><Text>Save</Text></View></TouchableOpacity>
+                <TouchableOpacity onPress={() => {setNewWeights()}}><View style={{backgroundColor: littleSection, height: deviceHeightPart, width: deviceWidth/3, marginLeft: deviceWidth/3, justifyContent: 'center', alignText: 'center', alignItems: 'center', borderWidth: 1, borderRadius: 15}}><Text style={{color: colorOfText, shadowOpacity: 0.5}}>Save</Text></View></TouchableOpacity>
                 <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
               </ScrollView>
             </>) : null}</View>
@@ -856,7 +856,7 @@ export default function App() {
                 </View>
                 <ScrollView style={{height: (deviceHeightPart*2)*16}}>
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[0].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[0].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -880,7 +880,7 @@ export default function App() {
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -2, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                    <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[1].name}</Text></View>
+                    <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[1].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker open = {openM2}
@@ -902,7 +902,7 @@ export default function App() {
                   </View>
                 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -3, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[2].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[2].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -925,7 +925,7 @@ export default function App() {
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -4, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[3].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[3].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -948,7 +948,7 @@ export default function App() {
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -5, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[4].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[4].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -971,7 +971,7 @@ export default function App() {
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -6, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[5].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[5].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -994,7 +994,7 @@ export default function App() {
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -7, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[6].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[6].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -1017,7 +1017,7 @@ export default function App() {
                   </View>
 
                   <View style={{height: deviceHeightPart*2, backgroundColor: sectionBackgroundColor, zIndex: -8, border: 'gray', justifyContent: 'right', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 10, width: deviceWidth-10, }}>
-                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={{fontSize: 24, fontWeight: 'bold', margin: 5}}>{factors[7].name}</Text></View>
+                  <View style={{width:(7.3*(deviceWidth))/10}}><Text style={styles.factors}>{factors[7].name}</Text></View>
                     
                     <View style={styles.topTaskbar}>
                       <DropDownPicker
@@ -1039,7 +1039,7 @@ export default function App() {
                         style={{ width: deviceWidth/5, height: taskbarHeight/2, left: 0, top: 4, margin: 5}}/>
                     </View>
                   </View>
-                  <TouchableHighlight onPress={() => setFactors(initFactors)}><Text>RESET FACTORS</Text></TouchableHighlight>
+                  {/* <TouchableHighlight onPress={() => setFactors(initFactors)}><Text>RESET FACTORS</Text></TouchableHighlight> */}
                   <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
                   </ScrollView>
                 </>) : null}</View>
@@ -1120,5 +1120,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: deviceHeightPart*2,
     width: deviceWidth,
+  },
+  factors: {
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    margin: 5,
+    color: colorOfText,
+    shadowOpacity: 0.5
   },
 });
