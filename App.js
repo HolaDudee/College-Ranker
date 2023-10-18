@@ -445,7 +445,7 @@ export default function App() {
 
             onChangeValue={(value) => {
               setValueMenu('home')
-              let newArray = [valueM1,valueM2,valueM3,valueM4,valueM5,valueM6,valueM7,valueM8,]
+              let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
               console.log('newArray - ')
               console.log(newArray)
               let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
