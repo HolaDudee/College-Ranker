@@ -37,7 +37,7 @@ let colorOfText = '#fdfeff';
 export default function App() {
 
   const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()}])
-  const [oldVal, setOldVal] = useState('')
+  const [oldVal, setOldVal] = useState('select')
 
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
@@ -88,11 +88,15 @@ export default function App() {
 
   const updateRatingsL = async (key) => {
     try {
+      console.log('URL_key - ')
+      console.log(key)
       const jsonValue = await AsyncStorage.getItem(key);
+      console.log('URL_jsonvalue - ')
+      console.log(jsonValue)
       const value = JSON.parse(jsonValue);
       if (value!=null){
         setRatingsL(value)
-        return value
+        // return value
       }
     } catch (e) {
       console.log(e)
@@ -102,18 +106,20 @@ export default function App() {
   const addRating = async (key, valueE) => {
     try {
       const jsonValue = JSON.stringify(valueE);
-      await AsyncStorage.setItem(key, jsonValue);
+      console.log('jsonvalue - ')
+      console.log(jsonValue)
+      await AsyncStorage.setItem(key, jsonValue).then(console.log('inFunc => itemSet'));
     } catch (e) {
       console.log(e)
     }
   };
 
   let initColleges = [
-    {label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()},
-    {label: 'UW - Madison', value: 'madison', ratingKey: 'ratingKey1', key: uuid.v4()},
-    {label: 'UW - La Crosse', value: 'laCrosse', ratingKey: 'ratingKey2', key: uuid.v4()},
-    {label: 'UW - Stevens Point', value: 'stevensPoint', ratingKey: 'ratingKey3', key: uuid.v4()},
-    {label: 'NTC', value: 'ntc', ratingKey: 'ratingKey4', key: uuid.v4()},
+    {label: 'Select a College', value: 'select', ratingKey: 'ratingKeyselect', key: uuid.v4()},
+    {label: 'UW - Madison', value: 'madison', ratingKey: 'ratingKeymadison', key: uuid.v4()},
+    {label: 'UW - La Crosse', value: 'laCrosse', ratingKey: 'ratingKeylaCrosse', key: uuid.v4()},
+    {label: 'UW - Stevens Point', value: 'stevensPoint', ratingKey: 'ratingKeystevensPoint', key: uuid.v4()},
+    {label: 'NTC', value: 'ntc', ratingKey: 'ratingKeyntc', key: uuid.v4()},
   ];
   
 
@@ -278,18 +284,27 @@ export default function App() {
     }
   };
 
-  let onCollegesValueChange = (value) => {
+  let onCollegesValueChange = (valueIn) => {
     setValueMenu('home')
     let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
-    // console.log('newArray - ')
-    // console.log(newArray)
+    console.log()
+    console.log()
+    console.log('newArray - ')
+    console.log(newArray)
+    console.log()
+    console.log()
     let oldRKey = valueT[valueT.findIndex(e => e.value == oldVal)].ratingKey
-    let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
+    let rKey = valueT[valueT.findIndex(e => e.value == valueIn)].ratingKey
     console.log()
     console.log('oldRKey - ')
     console.log(oldRKey)
     addRating(oldRKey, newArray).then(
+      console.log(),
+      console.log('rKey - '),
+      console.log(rKey),
       updateRatingsL(rKey).then(
+        console.log('OCVC_URL_ratingsL - '),
+        console.log(ratingsL),
         setValueM1(ratingsL[0]),
         setValueM2(ratingsL[1]),
         setValueM3(ratingsL[2]),
@@ -298,13 +313,45 @@ export default function App() {
         setValueM6(ratingsL[5]),
         setValueM7(ratingsL[6]),
         setValueM8(ratingsL[7]),
-        console.log('it is done.')
+        console.log('it is done.'),
+        
+        console.log('\n'),
+        console.log('it is done more betterer.'),
       )
+    )
+    delay(5000).then(
+      console.log('OCVC_D_ratingsL - '),
+      console.log(ratingsL),
+      setValueM1(ratingsL[0]),
+      setValueM2(ratingsL[1]),
+      setValueM3(ratingsL[2]),
+      setValueM4(ratingsL[3]),
+      setValueM5(ratingsL[4]),
+      setValueM6(ratingsL[5]),
+      setValueM7(ratingsL[6]),
+      setValueM8(ratingsL[7]),
     )
     // console.log()
     // // updateRatingsL(rKey)
     // console.log('ratingsL - ')
     // console.log(ratingsL)
+    if(value!=oldVal){
+      setOldVal(value)
+      // if (value)
+      console.log()
+      console.log()
+      console.log()
+      console.log('why?????????')
+      console.log()
+      console.log('value - ')
+      console.log(value)
+      console.log()
+      console.log('oldVal - ')
+      console.log(oldVal)
+      console.log()
+      console.log()
+      console.log()
+    }
   }
 
 //  let onCollegesValueChange = (value) => {
@@ -602,10 +649,12 @@ export default function App() {
 
           <View>{valueMenu=='devMenu' ? (<>
             <View style={{width: deviceWidth, textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}><Text style={{color: 'white', shadowOpacity: 100, margin: 15, fontSize: 24}}>Welcome to the Dev Menu</Text></View>
-            <TouchableOpacity style={{backgroundColor: 'red', height: deviceHeightPart, zIndex: -100}} onPress={() => {updateWeights(), console.log(weights)}}><Text>LOG WEIGHTS</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => {setViewedWeights()}}><Text>setViewedWeights</Text></TouchableOpacity>
-
-
+            <View style={{alignItems: 'center'}}>
+              <TouchableOpacity style={styles.devMenuItem} onPress={() => {updateWeights(), console.log(weights)}}><Text style={styles.devMenuItemText}>LOG WEIGHTS</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => {setViewedWeights().then(Alert.alert('Viewed Weights Set'))}} style={styles.devMenuItem}><Text style={styles.devMenuItemText}>setViewedWeights</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges), updateColleges('collegeList'), Alert.alert('All personalized colleges cleared')}} style={styles.devMenuItem}><Text style={styles.devMenuItemText}>resetColleges</Text></TouchableOpacity>
+            </View>
+{/*<TouchableOpacity style={styles.devMenuItem}><Text style={styles.devMenuItemText}></Text></TouchableOpacity>*/}
           </>) : null}</View>
 
 
@@ -1170,5 +1219,21 @@ const styles = StyleSheet.create({
     margin: 5,
     color: colorOfText,
     shadowOpacity: 0.5
+  },
+  devMenuItem: {
+    backgroundColor: littleSection,
+    width: deviceWidth/2,
+    height: deviceHeightPart*2,
+    borderWidth: 1,
+    borderRadius: 15,
+    marginBottom: deviceWidth/16,
+    justifyContent: 'center',
+    alignText: 'center',
+    alignItems: 'center',
+    color: colorOfText,
+  },
+  devMenuItemText: {
+    color: colorOfText,
+    shadowOpacity: 0.5,
   },
 });
