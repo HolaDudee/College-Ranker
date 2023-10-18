@@ -368,11 +368,11 @@ export default function App() {
   // ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
 
 
-  const sortedRatings = [].concat(ratings)
-    .sort((a, b) => a.rating > b.rating ? 1 : -1)
-    .map((item, i) => 
-        <div key={i}> {item.rating}</div>
-    );
+  // const sortedRatings = [].concat(ratings)
+  //   .sort((a, b) => a.rating > b.rating ? 1 : -1)
+  //   .map((item, i) => 
+  //       <div key={i}> {item.rating}</div>
+  //   );
 
 
   return (
