@@ -37,6 +37,7 @@ let colorOfText = '#fdfeff';
 export default function App() {
 
   const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()}])
+  const [oldVal, setOldVal] = useState('')
 
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
@@ -280,17 +281,30 @@ export default function App() {
   let onCollegesValueChange = (value) => {
     setValueMenu('home')
     let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
-    console.log('newArray - ')
-    console.log(newArray)
+    // console.log('newArray - ')
+    // console.log(newArray)
+    let oldRKey = valueT[valueT.findIndex(e => e.value == oldVal)].ratingKey
     let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
     console.log()
-    console.log('rKey - ')
-    console.log(rKey)
-    addRating(rKey, newArray).then(updateRatingsL(rKey))
-    console.log()
-    // updateRatingsL(rKey)
-    console.log('ratingsL - ')
-    console.log(ratingsL)
+    console.log('oldRKey - ')
+    console.log(oldRKey)
+    addRating(oldRKey, newArray).then(
+      updateRatingsL(rKey).then(
+        setValueM1(ratingsL[0]),
+        setValueM2(ratingsL[1]),
+        setValueM3(ratingsL[2]),
+        setValueM4(ratingsL[3]),
+        setValueM5(ratingsL[4]),
+        setValueM6(ratingsL[5]),
+        setValueM7(ratingsL[6]),
+        setValueM8(ratingsL[7]),
+        console.log('it is done.')
+      )
+    )
+    // console.log()
+    // // updateRatingsL(rKey)
+    // console.log('ratingsL - ')
+    // console.log(ratingsL)
   }
 
 //  let onCollegesValueChange = (value) => {

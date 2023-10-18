@@ -9,67 +9,67 @@
 					"label": "variables"
 				},
 				{
-					"line": 86,
+					"line": 87,
 					"column": 0,
 					"label": "ratingsFuncs"
 				},
 				{
-					"line": 118,
+					"line": 119,
 					"column": 2,
 					"label": "initArrs"
 				},
 				{
-					"line": 187,
+					"line": 188,
 					"column": 0,
 					"label": "collegeFuncs"
 				},
 				{
-					"line": 246,
+					"line": 247,
 					"column": 0,
 					"label": "weightFuncs"
 				},
 				{
-					"line": 278,
+					"line": 279,
 					"column": 0,
 					"label": "collegeFuncs"
 				},
 				{
-					"line": 324,
+					"line": 338,
 					"column": 0,
 					"label": "photoVariables"
 				},
 				{
-					"line": 476,
+					"line": 490,
 					"column": 0,
 					"label": "collegesDropDown"
 				},
 				{
-					"line": 499,
+					"line": 513,
 					"column": 13,
 					"label": "collegeModal"
 				},
 				{
-					"line": 553,
+					"line": 567,
 					"column": 0,
 					"label": "menuDropDown"
 				},
 				{
-					"line": 586,
+					"line": 600,
 					"column": 0,
 					"label": "devMenu"
 				},
 				{
-					"line": 616,
+					"line": 630,
 					"column": 17,
 					"label": "collegeDeletionModal"
 				},
 				{
-					"line": 848,
+					"line": 862,
 					"column": 0,
 					"label": "myColleges"
 				},
 				{
-					"line": 1107,
+					"line": 1121,
 					"column": 0,
 					"label": "stylesheet"
 				}
