@@ -22,8 +22,6 @@ let deviceHeightPart = deviceHeight/24;
 let deviceWidth = Dimensions.get('window').width;
 let ff = "Avenir";
 let color = "#16182d";
-// let settingsBackgroundColor = '#fb6767';
-// let settingsBackgroundColor = '#3A3B3C';
 let settingsBackgroundColor = color;
 let sectionBackgroundColor = '#252944';
 let littleSection = '#3b3e5d';
@@ -36,26 +34,14 @@ let iconColor = '#47e7a9';
 let colorOfText = '#fdfeff';
 
 
-// const Item = ({label}) => (
-//   <View style={{backgroundColor: 'purple', height: deviceHeightPart, width: deviceWidth-10}}>
-//     <Text style={styles.title}>{label}</Text>
-//   </View>
-// );
-
 export default function App() {
 
-  // const [text2, setText2] = useState('')
-  // const [modalVisible2, setModalVisible2] = useState(false)
-
-  // const [blankRating, setBlackRating] = useState([{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0}])
   const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()}])
 
-  let blankRating = [{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0},{value: 0}]
+  let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
 
   let getRatings = (ratingKey) => {
-    // console.log(valueT[1].ratingKey)
-    // console.log(blankRating[0].value)
     updateRatingsL(ratingKey)
   };
 
@@ -97,14 +83,10 @@ export default function App() {
 
   const updateRatingsL = async (key) => {
     try {
-      const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
+      const jsonValue = await AsyncStorage.getItem(key);
       const value = JSON.parse(jsonValue);
-      // return jsonValue != null ? JSON.parse(jsonValue) : null;
       if (value!=null){
-        // console.log('inFunc => ');
-        // console.log(value);
         setRatingsL(value)
-        // console.log(valueT)
         return value
       }
     } catch (e) {
@@ -114,8 +96,6 @@ export default function App() {
 
   const addRating = async (key, valueE) => {
     try {
-      // console.log('inFunc list - ')
-      // console.log(valueE)
       const jsonValue = JSON.stringify(valueE);
       await AsyncStorage.setItem(key, jsonValue);
     } catch (e) {
@@ -123,27 +103,12 @@ export default function App() {
     }
   };
 
-  // const renderItem = ({item}) => {
-  //   // const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-  //   // const color = item.id === selectedId ? 'white' : 'black';
-
-  //   return (
-  //     <Item
-  //       item={item}
-  //       // onPress={() => setSelectedId(item.id)}
-  //       backgroundColor={color}
-  //       textColor={'white'}
-  //     />
-  //   );
-  // };
-
   let initColleges = [
     {label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()},
     {label: 'UW - Madison', value: 'madison', ratingKey: 'ratingKey1', key: uuid.v4()},
     {label: 'UW - La Crosse', value: 'laCrosse', ratingKey: 'ratingKey2', key: uuid.v4()},
     {label: 'UW - Stevens Point', value: 'stevensPoint', ratingKey: 'ratingKey3', key: uuid.v4()},
     {label: 'NTC', value: 'ntc', ratingKey: 'ratingKey4', key: uuid.v4()},
-    // {name: '', value: ''},
   ];
   
 
@@ -162,8 +127,6 @@ export default function App() {
   
   const storeDataJSON = async (key, valueE) => {
     try {
-      // console.log('inFunc list - ')
-      // console.log(valueE)
       const jsonValue = JSON.stringify(valueE);
       await AsyncStorage.setItem(key, jsonValue);
     } catch (e) {
@@ -173,14 +136,10 @@ export default function App() {
   
   const updateColleges = async (key) => {
     try {
-      const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
+      const jsonValue = await AsyncStorage.getItem(key);
       const value = JSON.parse(jsonValue);
-      // return jsonValue != null ? JSON.parse(jsonValue) : null;
       if (value!=null){
-        // console.log('inFunc => ');
-        // console.log(value);
         setValueT(value)
-        // console.log(valueT)
         return value
       }
     } catch (e) {
@@ -190,14 +149,9 @@ export default function App() {
 
   const getDataJSON = async (key) => {
     try {
-      const jsonValue = await AsyncStorage.getItem(key);//.then(console.log('inFunction => data logged'));
+      const jsonValue = await AsyncStorage.getItem(key);
       const value = JSON.parse(jsonValue);
-      // return jsonValue != null ? JSON.parse(jsonValue) : null;
       if (value!=null){
-        // console.log('inFunc => ');
-        // console.log(value);
-        // setValueT(value)
-        // console.log(valueT)
         return value
       }
     } catch (e) {
@@ -205,102 +159,45 @@ export default function App() {
     }
   };
   
-  // const storeData = async (key, valueD) => {
-  //   try {
-  //     console.log('key - '+key+' - value - '+valueD)
-  //     await AsyncStorage.setItem(key, valueD);
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // };
-  
-  // const getData = async (key) => {
-  //   try {
-  //     const valueF = await AsyncStorage.getItem(key);
-  //     console.log('key - '+key+' - value - '+valueF)
-  //     return valueF;
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // };
-  
   React.useEffect(() => {
     updateColleges('collegeList')
   },[]);
-  // let initColleges = updateColleges('collegeList')
   
 
   const [factors, setFactors] = useState(initFactors)
   const [colleges, setColleges] = useState(valueT)
   const [deleteMenuVis, setDeleteMenuVis] = useState(false)
 
-  // const [settings, setSettings] = useState('none')
-  // const [mainDisplay, setMainDisplay] = useState('block')
-  // const [myColleges, setMyColleges] = useState('none')
-
   let removeValueCollage = (index) => {
     let newArr = valueT
     newArr.splice(index+1, 1)
-
-    // console.log()
-    // console.log('index - ')
-    // console.log(index)
-    // console.log()
-
-    // console.log(newArr)
     storeDataJSON('collegeList', newArr)
     updateColleges('collegeList')
-    // console.log(valueT)
   };
 
   let addCollege = (nameI, valueI) => {
-    // setValueT()
-    // let cushbear = [initColleges]
-    // ratingKey: 'ratingKey0',
     const newList = valueT.concat({label: nameI, value: valueI, ratingKey: 'ratingKey'+valueT.length, key: uuid.v4()});
-    // console.log()
-    // console.log('valueT.length - ')
-    // console.log(valueT.length)
-    // console.log()
     setValueT(newList)
-    // let cushbear = [current => [...current, {label: nameI, value: valueI, rating: {}}]]
-    // console.log(cushbear)
-    // console.log(valueT)
-    // console.log()
-    // console.log('updatteed valueT - ')
-    // console.log(valueT)
-    // console.log()
-    // console.log('newList - ')
-    // console.log(newList)
-    // console.log()
     storeDataJSON('collegeList', newList)
     updateColleges('collegeList')
-    // console.log(valueT)
   };
 
   let formatCollegeName = (name) => {
     name = name + ' '
     let formattedName = ''
     let lastIndex = 0
-    // console.log(name.toLowerCase().indexOf(' '))
     name = name.replaceAll('-', '')
     while (name.toLowerCase().indexOf(' ')!=-1){
       formattedName = formattedName + name.substring(lastIndex, name.toLowerCase().indexOf(' '))
       lastIndex = name.toLowerCase().indexOf(' ')
       name = name.replace(' ', '')
-      // console.log(name.toLowerCase().indexOf(' '))
-      // console.log(formattedName)
     }
-    // console.log('formattedName before => ' + formattedName)
     formattedName = formattedName.replace(formattedName.substring(0,1), formattedName.substring(0,1).toLowerCase())
-    // console.log('formattedName after => ' + formattedName)
     return formattedName
   };
 
   let addCollegeSumbitButton = () => {
     let valueR = formatCollegeName(text)
-    // console.log(text)
-    // console.log(valueR)
     addCollege(text, valueR)
     setText('')
     setModalVisible(!modalVisible)
@@ -310,37 +207,6 @@ export default function App() {
     setModalVisible(true)
   };
 
-  // let togSettings = () => {
-  //   if (settings=='block'){
-  //     setSettings('none'),
-  //     setMyColleges('none'),
-  //     setMainDisplay('block')
-  //   }
-  //   else {
-  //     setSettings('block'),
-  //     setMainDisplay('none'),
-  //     setMyColleges('none')
-  //   }
-  // };
-
-  // let togMyColleges = () => {
-  //   if (myColleges=='block'){
-  //     setSettings('none'),
-  //     setMyColleges('none'),
-  //     setMainDisplay('block')
-  //   }
-  //   else {
-  //     setSettings('none'),
-  //     setMainDisplay('none'),
-  //     setMyColleges('block')
-  //   }
-  // };
-
-  // let togHome = () => {
-  //   setSettings('none'),
-  //   setMyColleges('none'),
-  //   setMainDisplay('block')
-  // };
 
   setOpenMenuToggle = () => {
     setOpenMenu(true),
@@ -389,7 +255,6 @@ export default function App() {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('select')
-  // const [items, setItems] = useState(colleges);
 
   let setOpenUpdate = () => {
     
@@ -397,7 +262,6 @@ export default function App() {
       setOpen(true)
       updateColleges('collegeList')
       setColleges(valueT)
-      // setValue(colleges[0].value)
     }
     else{
       setOpen(false)
@@ -498,10 +362,10 @@ export default function App() {
   ])
   const [text, setText] = useState();
 
-  let ratings = [
-    // [{rating: valueS1}, {rating: valueS2}, {rating: valueS3}, {rating: valueS4}, {rating: valueS5}, {rating: valueS6}, {rating: valueS7}, {rating: valueS8}],
-    // [{}]
-  ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
+  // let ratings = [
+  //   // [{rating: valueS1}, {rating: valueS2}, {rating: valueS3}, {rating: valueS4}, {rating: valueS5}, {rating: valueS6}, {rating: valueS7}, {rating: valueS8}],
+  //   // [{}]
+  // ]; //REUSE DROPDOWNS, JUST SAVE IT AND READ IT WHEN DISPLAYING
 
 
   const sortedRatings = [].concat(ratings)
@@ -548,13 +412,6 @@ export default function App() {
               console.log(ratingsL)
             }}
             closeAfterSelecting = {true}
-            // dropDownContainerStyle={{
-            //   zIndex: 100,
-            //   marginTop: 7
-            // }}
-            // listItemContainer={{
-            //   zIndex: 100
-            // }}
             showBadgeDot = {false}
             theme = "DARK"
             searchable = {true}
@@ -570,15 +427,9 @@ export default function App() {
             <Image source={plusIcon} style={{height: taskbarHeight, width: iconWidth}}/>
           </TouchableOpacity>
           <Modal
-            // animationType="slide"
             transparent={false}
             visible={modalVisible}
             animationType='slide'
-            style={{}}
-            // onRequestClose={() => {
-            //   Alert.alert('Modal has been closed.');
-            //   setModalVisible(!modalVisible);
-            // }}
             >
               <SafeAreaView style={{backgroundColor: '#2c2b2b'}}>
 
@@ -593,10 +444,8 @@ export default function App() {
                 <View style={{width: deviceWidth-10, marginLeft: 5, backgroundColor: 'gray', borderRadius: 10}}>
                   <TextInput
                     style={{
-                      // width: deviceWidth-10,
                       borderWidth: 1,
                       borderRadius: 10,
-                      // marginLeft: 5,
                       height: deviceHeightPart*1.5,
                       textAlign: 'center',
                       justifyContent: 'center',
@@ -623,14 +472,6 @@ export default function App() {
                 </View>
 
                 <View style={{width: deviceWidth, height: deviceHeightPart*22.5}}></View>
-                {/* <View>
-                  <TextInput
-                    style={{}}
-                    onChangeText={onChangeNumber}
-                    value={number}
-                    // placeholder="useless placeholder"
-                  />
-                </View> */}
 
               </SafeAreaView>
             </Modal>
@@ -656,19 +497,6 @@ export default function App() {
           <TouchableOpacity onPress={setOpenMenuToggle} style={{position: 'absolute', top: deviceHeightPart*5.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
             <Image source={hamburgerIcon} style={{height: taskbarHeight, width: iconWidth}}/>
           </TouchableOpacity>
-
-          {/* <TouchableOpacity onPress={() => {storeDataJSON('collegeList', colleges), console.log('done')}} style={{position: 'absolute', top: deviceHeightPart*7.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
-            <Image source={hamburgerIcon} style={{height: taskbarHeight, width: iconWidth}}/>
-          </TouchableOpacity>
-        
-          <TouchableOpacity onPress={() => {updateColleges('collegeList')}} style={{position: 'absolute', top: deviceHeightPart*7.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
-          <View style={{backgroundColor: 'purple'}}><Text>UPDATE VALUET</Text></View>
-            {/* <Image source={{backgroundColor: 'pink'}} style={{height: taskbarHeight, width: iconWidth}}/> 
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges)}} style={{position: 'absolute', top: deviceHeightPart*9.5, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
-            <View style={{backgroundColor: 'purple'}}><Text>RESET COLLEGES</Text></View>
-          </TouchableOpacity> */}
         
         </View>
 
@@ -696,11 +524,6 @@ export default function App() {
 
             <View style={{backgroundColor: '', marginTop: 5}}>{valueMenu=='settings' ? (<>
 
-              {/* <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 5, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
-                <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges), updateColleges('collegeList'), Alert.alert('All personalized colleges cleared')}} style={{height: taskbarHeight, width: iconWidth}}>
-                  <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5277/5277847.png' }} style={{height: taskbarHeight, width: iconWidth}}/>
-                </TouchableOpacity>
-              </View> */}
 
               <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 0, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
                 <TouchableOpacity onPress={() => {setDeleteMenuVis(!deleteMenuVis)}} style={{height: taskbarHeight, width: iconWidth}}>
@@ -724,15 +547,11 @@ export default function App() {
                       </TouchableOpacity>
                     </View>
 
-                    {/* <View style={{width: deviceWidth-10, marginLeft: 5, backgroundColor: 'gray', borderRadius: 10}}> */}
-                    {/* <Text style={{}}>This exists, right?</Text> */}
                     <FlatList 
                       data={valueT.slice(1)}
                       renderItem={({ item, index }) => 
                         <View style={{backgroundColor: sectionBackgroundColor, alignItems: 'center', justifyContent: 'space-between', height: deviceHeightPart*1.5, flexDirection: 'row', marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 15}}>
                           <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
-                          {/* <Text>{index}</Text> */}
-                          {/* <View style={{flexDirection: 'column'}}><View style={{alignSelf: 'flex-end'}}><Text>HELLO</Text></View></View> */}
                           <TouchableOpacity onPress={() => {removeValueCollage(index)}}>
                             <View style={{backgroundColor: 'red', textAlign: 'center', marginRight: 5, alignItems: 'center', justifyContent: 'center', height: deviceHeightPart, width: deviceHeightPart, borderWidth: 1, borderRadius: 25}}>
                               <Text>-</Text>
@@ -740,9 +559,7 @@ export default function App() {
                           </TouchableOpacity>
                         </View>
                       }
-                      // keyExtractor={(item) => item.key}
                     />
-                    {/* </View> */}
 
 
                     <View style={{width: deviceWidth, height: deviceHeightPart*22.5}}></View>
@@ -951,39 +768,6 @@ export default function App() {
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
             <View>{valueMenu=='myColleges' ? (<>
-
-              {/* <TouchableOpacity onPress={() => {addRating('ratingKey4', blankRating), console.log('rating added')}} style={{position: '', top: 0, right: 0, margin: 5, marginTop: 10, height: taskbarHeight, width: iconWidth}}>
-                <View style={{height: taskbarHeight, width: iconWidth, backgroundColor: 'red'}}/>
-              </TouchableOpacity> */}
-          
-              {/*<Image source={require('./assets/img/collegeIcon.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} />*/}
-              
-              {/* <View style={{width: deviceWidth, alignItems: 'center', marginTop: 15, position: 'relative',}}>
-                <TouchableOpacity onPress={() => {setValueMenu('home'), setValue('ntc')}}>
-                  <View style={{borderWidth: 1, backgroundColor: settingsBackgroundColor, justifyContent: 'center', borderRadius: 10, width: deviceWidth-10, height: deviceHeightPart}}>
-                    <Text style={{textAlign: 'left', marginLeft: 10}}>NTC</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => {setValueMenu('home'), setValue('ntc')}}>
-                  <View style={{borderWidth: 1, backgroundColor: settingsBackgroundColor, marginTop: 5, justifyContent: 'center', borderRadius: 10, width: deviceWidth-10, height: deviceHeightPart}}>
-                    <Text style={{textAlign: 'left', marginLeft: 10}}>NTC</Text>
-                  </View>
-                </TouchableOpacity>
-              </View> */}
-
-
-              {/* <FlatList
-                data={valueT[0]}
-                renderItem={({item}) => <Item title={item.label} />}
-                keyExtractor={item => item.key}
-              /> */}
-
-              {/* <SectionList
-                renderItem={({item}) => <ListItem title={item.label} />} // Your record component here.
-                renderSectionHeader={({section}) => <H1 title={section.title} />} // Your date component here.
-                sections={valueT[0]}
-              /> */}
               <FlatList 
                 data={valueT.slice(1)}
                 renderItem={({ item }) => 
@@ -1006,12 +790,6 @@ export default function App() {
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 
             <View>{valueMenu=='home' ? (<>
-              {/*<TouchableOpacity onPress={this.addCollege} style={{width: deviceWidth/2+5}}>
-                <View style={{backgroundColor: 'lightblue', height: deviceHeightPart, justifyContent: 'center', width: deviceWidth/2, borderRadius: 15, marginLeft: 5}}><Text>Add New College</Text></View>
-              </TouchableOpacity>*/} 
-              {/* <Image source={require('./assets/img/homeIconV2.png')} style={{height: 50, width: 50, position: 'absolute', top: deviceHeight/4}} /> */}
-              
-              {/**/}
               <View style={{}}>{value!='select' ? (<>
 
                 <View style={{height: deviceHeightPart*2, backgroundColor: littleSection, zIndex: -1, border: 'gray', marginTop: 5, justifyContent: 'center', marginLeft: 5, flexDirection: 'row', alignItems: 'center', marginBottom: 5, borderWidth: 1, borderRadius: 15, width: deviceWidth-10, }}>
@@ -1206,7 +984,7 @@ export default function App() {
                   <View style={{zIndex: -100000, height: deviceHeightPart*20, justifyContent: 'flex-end',}}></View>
                   </ScrollView>
                 </>) : null}</View>
-              {/**/}
+
               
             </>) : null}</View>
           </View>
@@ -1214,39 +992,24 @@ export default function App() {
           <View style={styles.colleges}>
             <View>{value=='madison' ? (<>
 
-              {/* <Text>UW - Madison</Text> */}
+
 
             </>) : null}</View>
 
             <View>{value=='laCrosse' ? (<>
 
-              {/* <Text>UW - La Crosse</Text> */}
+
 
             </>) : null}</View>
 
             <View>{value=='stevensPoint' ? (<>
 
-              {/* <Text>UW - Stevens Point</Text> */}
+
 
             </>) : null}</View>
 
             <View>{value=='ntc' ? (<>
-              {/* <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {storeData('ntc','ntc'), console.log('data saved')}}>
-                <Text>SAVE NAME UNDER KEY NAME</Text>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {console.log('OUTPUT VALUE => '), itemOutput = AsyncStorage.getItem('ntc').then(console.log('Date Retrived')).catch, console.log(itemOutput), console.log('data retrieved?')}}>
-                <Text>GET AND LOG</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={{margin: 5, backgroundColor: 'green'}} onPress={() => {AsyncStorage.clear(), console.log('keys logged')}}>
-                <Text>GET AND LOG ALL KEYS</Text>
-              </TouchableOpacity>
-              <Text>NTC</Text>
-
-              <TouchableOpacity style={{margin: 5, backgroundColor: 'red'}} onPress={() => {console.log(AsyncStorage.getAllKeys().then(console.log('clear complete'))), console.log('maybe cleared')}}>
-                <Text>clear all (danger)</Text>
-              </TouchableOpacity> */}
             </>) : null}</View>
           
           </View>
@@ -1264,7 +1027,6 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
   colleges: {
-    // flex: 1,
     position: 'absolute',
     top: deviceHeight/4,
     alignItems: 'center',
@@ -1273,9 +1035,6 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   pages: {
-    // flex: 9,
-    // alignItems: 'left', //WHAT???
-    // justifyContent: 'center',
     textAlign: 'center',
   },
   topMargin: {
@@ -1303,15 +1062,4 @@ const styles = StyleSheet.create({
     height: deviceHeightPart*2,
     width: deviceWidth,
   },
-  // leftTopTaskbar: {
-  //   flexDirection: 'row-reverse',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-evenly',
-  //   position: 'absolute',
-  //   left: deviceWidth/2+5,
-  //   borderRadius: 10,
-  //   // height: deviceHeightPart*3,
-  //   // width: deviceWidth,
-  //   // backgroundColor: 'lightblue',
-  // },
 });
