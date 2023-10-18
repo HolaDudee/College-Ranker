@@ -238,7 +238,7 @@ export default function App() {
     // console.log()
     try {
       const jsonValue = JSON.stringify(arrNew)
-      await AsyncStorage.setItem('weights', jsonValue).then(Alert.alert('Weight Save Successful'))
+      await AsyncStorage.setItem('weights', jsonValue).then(Alert.alert('Settings Successfully Saved'))
       // storeDataJSON('weights', weights)
     } catch (e) {
       console.log(e)
