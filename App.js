@@ -229,9 +229,15 @@ export default function App() {
   // };
 
   let setNewWeights = async () => {
-    setWeights([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8])
+    let arrNew = [valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8]
+    // console.log()
+    // console.log('arrNew - ')
+    // console.log(arrNew)
+    // console.log('arrNew should be - ')
+    // console.log([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8])
+    // console.log()
     try {
-      const jsonValue = JSON.stringify(weights)
+      const jsonValue = JSON.stringify(arrNew)
       await AsyncStorage.setItem('weights', jsonValue).then(Alert.alert('Weight Save Successful'))
       // storeDataJSON('weights', weights)
     } catch (e) {
@@ -241,7 +247,7 @@ export default function App() {
 
   let setViewedWeights = () => {
     updateWeights().then(() => {
-      console.log(weights)
+      // console.log(weights)
       setValueS1(weights[0])
       setValueS2(weights[1])
       setValueS3(weights[2])
@@ -251,8 +257,8 @@ export default function App() {
       setValueS7(weights[6])
       setValueS8(weights[7])
     })
-    console.log('weights - ')
-    console.log(weights)
+    // console.log('weights - ')
+    // console.log(weights)
   };
 
   const updateWeights = async () => {
@@ -260,10 +266,10 @@ export default function App() {
       const jsonValue = await AsyncStorage.getItem('weights');
       const value = JSON.parse(jsonValue);
       if (value!=null){
-        console.log('value - ')
-        console.log(value)
+        // console.log('value - ')
+        // console.log(value)
         
-        delay(2500).then(setWeights(value))
+        setWeights(value)
         // return value
       }
     } catch (e) {
@@ -275,9 +281,7 @@ export default function App() {
     setOpenMenu(true)
     setValue('select')
     setOpen(false)
-    console.log('before func')
     setViewedWeights()
-    console.log('after func')
   };
 
   let homeWhite = require('./assets/img/homeIconV2White.png');
