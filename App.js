@@ -41,6 +41,10 @@ export default function App() {
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
 
+  const delay = (ms) => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+
   let getRatings = (ratingKey) => {
     updateRatingsL(ratingKey)
   };
@@ -208,11 +212,7 @@ export default function App() {
   };
 
 
-  setOpenMenuToggle = () => {
-    setOpenMenu(true),
-    setValue('select'),
-    setOpen(false)
-  };
+  
 
   // let updateWeights = () => {
   //   setWeights([
@@ -228,9 +228,15 @@ export default function App() {
   //   storeDataJSON('weights', weights)
   // };
 
-  let setNewWeights = () => {
+  let setNewWeights = async () => {
     setWeights([valueS1, valueS2, valueS3, valueS4, valueS5, valueS6, valueS7, valueS8])
-    storeDataJSON('weights', weights).then(Alert.alert('Weight Save Successful'))
+    try {
+      const jsonValue = JSON.stringify(weights)
+      await AsyncStorage.setItem('weights', jsonValue).then(Alert.alert('Weight Save Successful'))
+      // storeDataJSON('weights', weights)
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   let setViewedWeights = () => {
@@ -245,6 +251,8 @@ export default function App() {
       setValueS7(weights[6])
       setValueS8(weights[7])
     })
+    console.log('weights - ')
+    console.log(weights)
   };
 
   const updateWeights = async () => {
@@ -252,12 +260,24 @@ export default function App() {
       const jsonValue = await AsyncStorage.getItem('weights');
       const value = JSON.parse(jsonValue);
       if (value!=null){
-        setWeights(value)
-        return value
+        console.log('value - ')
+        console.log(value)
+        
+        delay(2500).then(setWeights(value))
+        // return value
       }
     } catch (e) {
       console.log(e)
     }
+  };
+
+  setOpenMenuToggle = () => {
+    setOpenMenu(true)
+    setValue('select')
+    setOpen(false)
+    console.log('before func')
+    setViewedWeights()
+    console.log('after func')
   };
 
   let homeWhite = require('./assets/img/homeIconV2White.png');
@@ -508,8 +528,14 @@ export default function App() {
             setValue={setValueMenu}
             setItems={setItemsMenu}
 
+            onOpen = {() => {
+              
+            }}
+
             onChangeValue={(value) => {
               setViewedWeights()
+              // delay(2500).then(setViewedWeights())
+              
             }}
             
             closeAfterSelecting={true}
