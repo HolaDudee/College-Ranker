@@ -294,10 +294,16 @@ export default function App() {
     console.log()
     console.log()
     let oldRKey = valueT[valueT.findIndex(e => e.value == oldVal)].ratingKey
-    let rKey = valueT[valueT.findIndex(e => e.value == valueIn)].ratingKey
+    let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
+    console.log()
+    console.log()
     console.log()
     console.log('oldRKey - ')
     console.log(oldRKey)
+    console.log()
+    console.log()
+    console.log()
+    console.log()
     addRating(oldRKey, newArray).then(
       console.log(),
       console.log('rKey - '),
@@ -335,7 +341,7 @@ export default function App() {
     // // updateRatingsL(rKey)
     // console.log('ratingsL - ')
     // console.log(ratingsL)
-    if(value!=oldVal){
+    if(value!=oldVal){ //may need 3rd variable
       setOldVal(value)
       // if (value)
       console.log()
@@ -343,15 +349,17 @@ export default function App() {
       console.log()
       console.log('why?????????')
       console.log()
-      console.log('value - ')
-      console.log(value)
-      console.log()
-      console.log('oldVal - ')
-      console.log(oldVal)
-      console.log()
       console.log()
       console.log()
     }
+    console.log()
+    console.log('value - ')
+    console.log(value)
+    console.log()
+    console.log('oldVal - ')
+    console.log(oldVal)
+    console.log()
+    console.log()
   }
 
 //  let onCollegesValueChange = (value) => {
