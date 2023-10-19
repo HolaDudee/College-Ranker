@@ -36,7 +36,8 @@ let colorOfText = '#fdfeff';
 
 export default function App() {
 
-  const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKey0', key: uuid.v4()}])
+  const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKeyselect', key: uuid.v4()}])
+  const [semiOldVal, setSemiOldVal] = useState('select')
   const [oldVal, setOldVal] = useState('select')
 
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -93,11 +94,20 @@ export default function App() {
       const jsonValue = await AsyncStorage.getItem(key);
       console.log('URL_jsonvalue - ')
       console.log(jsonValue)
-      const value = JSON.parse(jsonValue);
-      if (value!=null){
+      let value = JSON.parse(jsonValue);
+      console.log('URL_value - ')
+      console.log(value)
+      // if (value!=null){
         setRatingsL(value)
-        // return value
-      }
+        console.log()
+        console.log()
+        console.log('URL_ratingsL - ')
+        console.log(ratingsL)
+        console.log(value)
+        console.log()
+        console.log()
+        return value
+      // }
     } catch (e) {
       console.log(e)
     }
@@ -284,8 +294,9 @@ export default function App() {
     }
   };
 
-  let onCollegesValueChange = (valueIn) => {
+  let onCollegesValueChange = async (valueIn) => {
     setValueMenu('home')
+    
     let newArray = [valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8]
     console.log()
     console.log()
@@ -293,73 +304,156 @@ export default function App() {
     console.log(newArray)
     console.log()
     console.log()
-    let oldRKey = valueT[valueT.findIndex(e => e.value == oldVal)].ratingKey
-    let rKey = valueT[valueT.findIndex(e => e.value == value)].ratingKey
-    console.log()
-    console.log()
-    console.log()
-    console.log('oldRKey - ')
-    console.log(oldRKey)
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    addRating(oldRKey, newArray).then(
-      console.log(),
-      console.log('rKey - '),
-      console.log(rKey),
-      updateRatingsL(rKey).then(
-        console.log('OCVC_URL_ratingsL - '),
-        console.log(ratingsL),
-        setValueM1(ratingsL[0]),
-        setValueM2(ratingsL[1]),
-        setValueM3(ratingsL[2]),
-        setValueM4(ratingsL[3]),
-        setValueM5(ratingsL[4]),
-        setValueM6(ratingsL[5]),
-        setValueM7(ratingsL[6]),
-        setValueM8(ratingsL[7]),
-        console.log('it is done.'),
+    console.log(valueT)
+    let oldRVal = valueT[valueT.findIndex(e => e.value == oldVal)]
+    console.log(oldRVal)
+    let oldRKey = oldRVal.ratingKey
+    let rVal = valueT[valueT.findIndex(e => e.value == value)]
+    console.log(rVal)
+    let rKey = rVal.ratingKey
+
+    let jsonValue = await AsyncStorage.getItem(rKey);
+    console.log('URL_jsonvalue - ')
+    console.log(jsonValue)
+    let parsedJSONValue = JSON.parse(jsonValue);
+
+    setValueM1(parsedJSONValue[0])
+    setValueM2(parsedJSONValue[1])
+    setValueM3(parsedJSONValue[2])
+    setValueM4(parsedJSONValue[3])
+    setValueM5(parsedJSONValue[4])
+    setValueM6(parsedJSONValue[5])
+    setValueM7(parsedJSONValue[6])
+    setValueM8(parsedJSONValue[7])
+    console.log('MANUAL OUTPUTING Ms')
+    console.log([valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8])
+
+    addRating(rKey, newArray)
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log('oldRKey - ')
+    // console.log(oldRKey)
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // let url_returned = updateRatingsL(rKey)
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log('OCVC_url_returned - ')
+    // console.log(url_returned)
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // addRating(oldRKey, newArray).then(
+      // console.log(),
+      // console.log('rKey - '),
+      // console.log(rKey),
+      // updateRatingsL(rKey).then(
+        // console.log('OCVC_URL_ratingsL - '),
+        // console.log(ratingsL),
+        // setValueM1(ratingsL[0]),
+        // setValueM2(ratingsL[1]),
+        // setValueM3(ratingsL[2]),
+        // setValueM4(ratingsL[3]),
+        // setValueM5(ratingsL[4]),
+        // setValueM6(ratingsL[5]),
+        // setValueM7(ratingsL[6]),
+        // setValueM8(ratingsL[7]),
+        // console.log('it is done.'),
         
-        console.log('\n'),
-        console.log('it is done more betterer.'),
-      )
-    )
-    delay(5000).then(
-      console.log('OCVC_D_ratingsL - '),
-      console.log(ratingsL),
-      setValueM1(ratingsL[0]),
-      setValueM2(ratingsL[1]),
-      setValueM3(ratingsL[2]),
-      setValueM4(ratingsL[3]),
-      setValueM5(ratingsL[4]),
-      setValueM6(ratingsL[5]),
-      setValueM7(ratingsL[6]),
-      setValueM8(ratingsL[7]),
-    )
+        // console.log('\n'),
+        // console.log('it is done more betterer.'),
+    //   )
+    // )
+    // delay(5000).then(
+    //   // console.log('OCVC_D_ratingsL - '),
+    //   // console.log(ratingsL),
+    //   setValueM1(ratingsL[0]),
+    //   setValueM2(ratingsL[1]),
+    //   setValueM3(ratingsL[2]),
+    //   setValueM4(ratingsL[3]),
+    //   setValueM5(ratingsL[4]),
+    //   setValueM6(ratingsL[5]),
+    //   setValueM7(ratingsL[6]),
+    //   setValueM8(ratingsL[7]),
+    // )
     // console.log()
     // // updateRatingsL(rKey)
     // console.log('ratingsL - ')
     // console.log(ratingsL)
-    if(value!=oldVal){ //may need 3rd variable
-      setOldVal(value)
-      // if (value)
-      console.log()
-      console.log()
-      console.log()
-      console.log('why?????????')
-      console.log()
-      console.log()
-      console.log()
-    }
-    console.log()
-    console.log('value - ')
-    console.log(value)
-    console.log()
-    console.log('oldVal - ')
-    console.log(oldVal)
-    console.log()
-    console.log()
+
+
+    // if(value!=oldVal){ //may need 3rd variable
+    //   setSemiOldVal(oldVal)
+    //   setOldVal(value)
+    //   if (oldVal==value){
+    //     setOldVal(semiOldVal)
+    //     console.log()
+    //     console.log()
+    //     console.log()
+    //     console.log('why not?????????')
+    //     console.log()
+    //     console.log()
+        
+    //   }
+    //   // if (semiOldVal!=value){
+    //   //   setOldVal(semiOldVal)
+    //   // }
+    //   // if (value)
+    //   console.log()
+    //   console.log()
+    //   console.log()
+    //   console.log('why?????????')
+    //   console.log()
+    //   console.log()
+    //   console.log()
+    // }
+
+    // console.log('OV==V_value - ')
+    // console.log(value)
+    // console.log()
+    // console.log('OV==V_oldVal - ')
+    // console.log(oldVal)
+    // console.log()
+    // console.log('OV==V_semiOldVal - ')
+    // console.log(semiOldVal)
+    // console.log()
+    // console.log(oldVal==value)
+    // console.log()
+
+    // if (oldVal==value){
+    //   setOldVal(semiOldVal)
+    //   console.log()
+    //   console.log()
+    //   console.log()
+    //   console.log('why not?????????')
+    //   console.log()
+    //   console.log(oldVal==value)
+    //   console.log()
+    //   console.log()
+    //   console.log()
+    //   console.log()
+      
+    // }
+    // console.log()
+    // console.log('value - ')
+    // console.log(value)
+    // console.log()
+    // console.log('oldVal - ')
+    // console.log(oldVal)
+    // console.log()
+    // console.log('semiOldVal - ')
+    // console.log(semiOldVal)
+    // console.log()
+    // console.log()
+    // console.log()
   }
 
 //  let onCollegesValueChange = (value) => {
