@@ -108,8 +108,8 @@ export default function App() {
     const GR_total = ratingsTotals.concat(total)
     setRatingsTotals(GR_total)
     // console.log()
-    // console.log('GR_total - ')
-    // console.log(GR_total)
+    console.log('GR_total - ')
+    console.log(GR_total)
     // console.log()
     // console.log('ratingsTotals - ')
     // console.log(ratingsTotals)
@@ -767,15 +767,29 @@ export default function App() {
               
             }}
 
-            onChangeValue={(value) => {
+            onChangeValue = {(value) => {
               setViewedWeights()
-
+              console.log('------BEFORE------')
+              console.log('colleges.length - ')
+              console.log(colleges.length)
+              for (let i = 1; i < colleges.length; i = i + 1){
+                console.log()
+                console.log('colleges[i].ratingKey - ')
+                console.log(colleges[i].ratingKey)
+                console.log()
+                getRating(colleges[i].ratingKey)
+                console.log('ratingsTotals - ')
+                console.log(ratingsTotals)
+              }
+              console.log('------AFTER------')
+              console.log()
+              console.log()
               // delay(2500).then(setViewedWeights())
               
             }}
             
             closeAfterSelecting={true}
-            textStyle={{fontSize: 30}}
+            textStyle={{fontSize: 30, color: colorOfText, shadowOpacity: 0.5}}
             theme='DARK'
             mode='BADGE'
             listMode='MODAL'
