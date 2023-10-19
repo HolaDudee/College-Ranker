@@ -51,14 +51,35 @@ export default function App() {
     updateRatingsL(ratingKey)
   };
 
-  let getRating = (ratingKey) => {
-    getRatings(ratingKey)
+  let getRating = async (ratingKey) => {
+    // getRatings(ratingKey)
+    // let rVal = valueT[valueT.findIndex(e => e.value == value)]
+    // console.log(rVal)
+    // let rKey = rVal.ratingKey
+    let rKey = ratingKey
+
+    let jsonValue = await AsyncStorage.getItem(rKey);
+    console.log('URL_jsonvalue - ')
+    console.log(jsonValue)
+    let parsedJSONValue = JSON.parse(jsonValue);
+
+    setValueM1(parsedJSONValue[0])
+    setValueM2(parsedJSONValue[1])
+    setValueM3(parsedJSONValue[2])
+    setValueM4(parsedJSONValue[3])
+    setValueM5(parsedJSONValue[4])
+    setValueM6(parsedJSONValue[5])
+    setValueM7(parsedJSONValue[6])
+    setValueM8(parsedJSONValue[7])
+    console.log('MANUAL OUTPUTING Ms')
+    console.log([valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8])
+
     updateWeights()
-    let ratings = ratingsL
+    let ratings = parsedJSONValue
     let total = 0
     console.log(weights)
     for (let i = 0; i<ratings.length; i = i + 1){
-      total = total + ((ratings[i])*(weights[i].weight/10))
+      total = total + ((ratings[i])*(weights[i]/10))
       console.log()
       console.log('i - '+i)
       console.log()
