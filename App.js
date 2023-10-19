@@ -1120,14 +1120,14 @@ export default function App() {
                 renderItem={({ item, index }) => 
                   <View style={{backgroundColor: sectionBackgroundColor, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
                     <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
-                    <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{Math.round(ratingsTotals[index]*100)/100}</Text>
+                    <View style={{alignItems: 'flex-end', marginTop: -26, marginRight: 5}}><Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{Math.round(ratingsTotals[index]*100)/100}</Text></View>
                     {/* <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{ratingsTotals[index]}</Text> */}
-                    <View style={{alignItems: 'flex-end', justifyContent: 'flex-start', marginTop: -24}}>
-                      {/* <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity> */}
+                    {/* <View style={{alignItems: 'flex-end', justifyContent: 'flex-start', marginTop: -24}}>
+                      {/* <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity> 
                       <TouchableOpacity onPress={() => {console.log('getRatingsOutput'), console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
                       <TouchableOpacity onPress={() => {console.log(ratingsTotals)}}><View><Text style={{marginTop: 10}}>logList</Text></View></TouchableOpacity>
 
-                    </View>
+                    </View> */}
                   </View>
                 }
                 // keyExtractor={(item) => item.key}
