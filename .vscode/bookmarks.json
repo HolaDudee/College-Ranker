@@ -39,47 +39,47 @@
 					"label": "weightFuncs"
 				},
 				{
-					"line": 377,
+					"line": 379,
 					"column": 0,
 					"label": "collegeFuncs"
 				},
 				{
-					"line": 572,
+					"line": 574,
 					"column": 0,
 					"label": "photoVariables"
 				},
 				{
-					"line": 724,
+					"line": 726,
 					"column": 0,
 					"label": "collegesDropDown"
 				},
 				{
-					"line": 747,
+					"line": 749,
 					"column": 13,
 					"label": "collegeModal"
 				},
 				{
-					"line": 801,
+					"line": 803,
 					"column": 0,
 					"label": "menuDropDown"
 				},
 				{
-					"line": 849,
+					"line": 851,
 					"column": 0,
 					"label": "devMenu"
 				},
 				{
-					"line": 881,
+					"line": 885,
 					"column": 17,
 					"label": "collegeDeletionModal"
 				},
 				{
-					"line": 1113,
+					"line": 1117,
 					"column": 0,
 					"label": "myColleges"
 				},
 				{
-					"line": 1375,
+					"line": 1379,
 					"column": 0,
 					"label": "stylesheet"
 				}

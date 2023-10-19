@@ -250,7 +250,7 @@ export default function App() {
   }, []);
   
   useEffect(() => {
-    console.log(),
+    // console.log(),
     // console.log('UC_pasredJSONValue - '),
     // console.log(pasredJSONValue),
     // console.log(),
@@ -261,10 +261,10 @@ export default function App() {
   }, [valueT])
 
   useEffect(() => {
-    console.log()
-    console.log('UE_2_colleges - ')
-    console.log(colleges)
-    console.log()
+    // console.log()
+    // console.log('UE_2_colleges - ')
+    // console.log(colleges)
+    // console.log()
   }, [colleges])
 
   const [factors, setFactors] = useState(initFactors)
@@ -360,6 +360,8 @@ export default function App() {
     // console.log('weights - ')
     // console.log(weights)
   };
+
+  
 
   const updateWeights = async () => {
     try {
@@ -856,6 +858,8 @@ export default function App() {
               <TouchableOpacity style={styles.devMenuItem} onPress={() => {updateWeights(), console.log(weights)}}><Text style={styles.devMenuItemText}>LOG WEIGHTS</Text></TouchableOpacity>
               <TouchableOpacity onPress={() => {setViewedWeights().then(Alert.alert('Viewed Weights Set'))}} style={styles.devMenuItem}><Text style={styles.devMenuItemText}>setViewedWeights</Text></TouchableOpacity>
               <TouchableOpacity onPress={() => {storeDataJSON('collegeList', initColleges), updateColleges('collegeList'), Alert.alert('All personalized colleges cleared')}} style={styles.devMenuItem}><Text style={styles.devMenuItemText}>resetColleges</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => {console.log(ratingsTotals)}} style={styles.devMenuItem}><Text style={styles.devMenuItemText}>logList</Text></TouchableOpacity>
+            
             </View>
 {/*<TouchableOpacity style={styles.devMenuItem}><Text style={styles.devMenuItemText}></Text></TouchableOpacity>*/}
           </>) : null}</View>
