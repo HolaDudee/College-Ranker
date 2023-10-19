@@ -39,6 +39,7 @@ export default function App() {
   const [valueT, setValueT] = useState([{label: 'Select a College', value: 'select', ratingKey: 'ratingKeyselect', key: uuid.v4()}])
   const [semiOldVal, setSemiOldVal] = useState('select')
   const [oldVal, setOldVal] = useState('select')
+  const [ratingsListMyCol, setRatingsListMyCol] = useState()
 
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
@@ -56,55 +57,65 @@ export default function App() {
     // let rVal = valueT[valueT.findIndex(e => e.value == value)]
     // console.log(rVal)
     // let rKey = rVal.ratingKey
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
+    // console.log()
     let rKey = ratingKey
-
+    // console.log('rKey - ')
+    // console.log(rKey)
     let jsonValue = await AsyncStorage.getItem(rKey);
-    console.log('URL_jsonvalue - ')
-    console.log(jsonValue)
+    // console.log('URL_jsonvalue - ')
+    // console.log(jsonValue)
     let parsedJSONValue = JSON.parse(jsonValue);
+    // console.log('URL_parsedJSONValue - ')
+    // console.log(parsedJSONValue)
 
-    setValueM1(parsedJSONValue[0])
-    setValueM2(parsedJSONValue[1])
-    setValueM3(parsedJSONValue[2])
-    setValueM4(parsedJSONValue[3])
-    setValueM5(parsedJSONValue[4])
-    setValueM6(parsedJSONValue[5])
-    setValueM7(parsedJSONValue[6])
-    setValueM8(parsedJSONValue[7])
-    console.log('MANUAL OUTPUTING Ms')
-    console.log([valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8])
+    // // setValueM1(parsedJSONValue[0])
+    // // setValueM2(parsedJSONValue[1])
+    // // setValueM3(parsedJSONValue[2])
+    // // setValueM4(parsedJSONValue[3])
+    // // setValueM5(parsedJSONValue[4])
+    // // setValueM6(parsedJSONValue[5])
+    // // setValueM7(parsedJSONValue[6])
+    // // setValueM8(parsedJSONValue[7])
+    // // console.log('MANUAL OUTPUTING Ms')
+    // // console.log([valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8])
 
     updateWeights()
     let ratings = parsedJSONValue
     let total = 0
-    console.log(weights)
+    // console.log('weights - ')
+    // console.log(weights)
     for (let i = 0; i<ratings.length; i = i + 1){
       total = total + ((ratings[i])*(weights[i]/10))
-      console.log()
-      console.log('i - '+i)
-      console.log()
-      console.log('ratings[i] - ')
-      console.log(ratings[i])
-      console.log()
-      console.log('weight[i].weight - ')
-      console.log(weights[i].weight)
-      console.log()
-      console.log('total - ')
-      console.log(total)
-      console.log()
+      // console.log()
+      // console.log('i - '+i)
+      // console.log()
+      // console.log('ratings[i] - ')
+      // console.log(ratings[i])
+      // console.log()
+      // console.log('weight[i].weight - ')
+      // console.log(weights[i])
+      // console.log()
+      // console.log('total - ')
+      // console.log(total)
+      // console.log()
     }
-    console.log()
-    console.log('total - ')
-    console.log(total)
-    console.log()
-    console.log('weights - ')
-    console.log(weights)
-    console.log()
-    console.log('ratings - ')
-    console.log(ratings)
-    console.log()
-    console.log('weights[0] - ')
-    console.log(weights[0].weight)
+    // console.log()
+    // console.log('total - ')
+    // console.log(total)
+    // console.log()
+    // console.log('weights - ')
+    // console.log(weights)
+    // console.log()
+    // console.log('ratings - ')
+    // console.log(ratings)
+    // console.log()
+    // console.log('weights[0] - ')
+    // console.log(weights[0])
 
   };
 
@@ -1038,13 +1049,16 @@ export default function App() {
             <View>{valueMenu=='myColleges' ? (<>
               <FlatList 
                 data={valueT.slice(1)}
-                renderItem={({ item }) => 
+                renderItem={({ item, index }) => 
                   <View style={{backgroundColor: sectionBackgroundColor, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
                     <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
 
                     <View style={{alignItems: 'flex-end', justifyContent: 'flex-start', marginTop: -24}}>
                       <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity>
                       <TouchableOpacity onPress={() => {console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
+                      <TouchableOpacity onPress={() => {
+
+                      }}><View><Text style={{marginTop: 10}}>logList</Text></View></TouchableOpacity>
                     </View>
                   </View>
                 }
