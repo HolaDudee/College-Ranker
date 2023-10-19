@@ -40,7 +40,7 @@ export default function App() {
   const [semiOldVal, setSemiOldVal] = useState('select')
   const [oldVal, setOldVal] = useState('select')
   const [ratingsListMyCol, setRatingsListMyCol] = useState()
-  const [ratingsTotals, setRatingsTotals] = useState([])
+  const [ratingsTotals, setRatingsTotals] = useState([0, 0, 0, 0])
 
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
@@ -71,8 +71,8 @@ export default function App() {
     // console.log('URL_jsonvalue - ')
     // console.log(jsonValue)
     let parsedJSONValue = JSON.parse(jsonValue);
-    // console.log('URL_parsedJSONValue - ')
-    // console.log(parsedJSONValue)
+    console.log('GR_parsedJSONValue - ')
+    console.log(parsedJSONValue)
 
     // // setValueM1(parsedJSONValue[0])
     // // setValueM2(parsedJSONValue[1])
@@ -110,10 +110,10 @@ export default function App() {
     // console.log()
     console.log('GR_total - ')
     console.log(GR_total)
-    // console.log()
-    // console.log('ratingsTotals - ')
-    // console.log(ratingsTotals)
-    // console.log()
+    console.log()
+    console.log('GR_ratingsTotals - ')
+    console.log(ratingsTotals)
+    console.log()
     // return total
     // console.log()
     // console.log('total - ')
