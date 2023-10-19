@@ -197,7 +197,8 @@ export default function App() {
   };
 
   let addCollege = (nameI, valueI) => {
-    const newList = valueT.concat({label: nameI, value: valueI, ratingKey: 'ratingKey'+valueI, key: uuid.v4()});
+    const newList = valueT.concat({label: nameI, value: valueI, ratingKey: 'ratingKey'+valueI, key: uuid.v4()})
+    addRating('ratingKey'+valueI, [0, 0, 0, 0, 0, 0, 0, 0])
     setValueT(newList)
     storeDataJSON('collegeList', newList)
     updateColleges('collegeList')
