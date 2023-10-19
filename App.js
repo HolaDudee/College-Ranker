@@ -105,7 +105,7 @@ export default function App() {
       // console.log(total)
       // console.log()
     }
-    const GR_total = ratingsTotals.concat(total)
+    const GR_total = ratingsTotals.concat(ratingsTotals, total)
     setRatingsTotals(GR_total)
     // console.log()
     console.log('GR_total - ')
@@ -1081,11 +1081,12 @@ export default function App() {
                 renderItem={({ item, index }) => 
                   <View style={{backgroundColor: sectionBackgroundColor, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
                     <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
-                    <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{roundNumber(ratingsTotals[index])}</Text>
+                    <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{Math.round(ratingsTotals[index]*100)/100}</Text>
                     <View style={{alignItems: 'flex-end', justifyContent: 'flex-start', marginTop: -24}}>
                       {/* <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity> */}
                       <TouchableOpacity onPress={() => {console.log('getRatingsOutput'), console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
-                      {/* <TouchableOpacity onPress={() => {console.log(ratingsTotals)}}><View><Text style={{marginTop: 10}}>logList</Text></View></TouchableOpacity> */}
+                      <TouchableOpacity onPress={() => {console.log(ratingsTotals)}}><View><Text style={{marginTop: 10}}>logList</Text></View></TouchableOpacity>
+
                     </View>
                   </View>
                 }
