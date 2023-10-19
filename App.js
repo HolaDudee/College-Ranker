@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {} from 'expo';
 <StatusBar style="dark" />
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { AppRegistry, Text, View, StyleSheet, Image, FlatList, SectionList, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -40,7 +40,7 @@ export default function App() {
   const [semiOldVal, setSemiOldVal] = useState('select')
   const [oldVal, setOldVal] = useState('select')
   const [ratingsListMyCol, setRatingsListMyCol] = useState()
-  const [ratingsTotals, setRatingsTotals] = useState([0, 0, 0, 0])
+  const [ratingsTotals, setRatingsTotals] = useState([])
 
   let blankRating = [0, 0, 0, 0, 0, 0, 0, 0]
   const [ratingsL, setRatingsL] = useState(blankRating)
@@ -65,8 +65,10 @@ export default function App() {
     // console.log()
     // console.log()
     let rKey = ratingKey
-    // console.log('rKey - ')
-    // console.log(rKey)
+    console.log('-----rKey-----')
+    console.log('rKey - ')
+    console.log(rKey)
+    console.log('-----rKey-----')
     let jsonValue = await AsyncStorage.getItem(rKey);
     // console.log('URL_jsonvalue - ')
     // console.log(jsonValue)
@@ -85,31 +87,36 @@ export default function App() {
     // // console.log('MANUAL OUTPUTING Ms')
     // // console.log([valueM1, valueM2, valueM3, valueM4, valueM5, valueM6, valueM7, valueM8])
 
-    updateWeights()
+    // updateWeights()
     let ratings = parsedJSONValue
     let total = 0
     // console.log('weights - ')
     // console.log(weights)
+    console.log('-----forLoop-----')
     for (let i = 0; i<ratings.length; i = i + 1){
       total = total + ((ratings[i])*(weights[i]/10))
-      // console.log()
-      // console.log('i - '+i)
-      // console.log()
-      // console.log('ratings[i] - ')
-      // console.log(ratings[i])
-      // console.log()
-      // console.log('weight[i].weight - ')
-      // console.log(weights[i])
-      // console.log()
-      // console.log('total - ')
-      // console.log(total)
-      // console.log()
+      console.log()
+      console.log('i - '+i)
+      console.log()
+      console.log('ratings[i] - ')
+      console.log(ratings[i])
+      console.log()
+      console.log('weight[i].weight - ')
+      console.log(weights[i])
+      console.log()
+      console.log('total - ')
+      console.log(total)
+      console.log()
     }
-    const GR_total = ratingsTotals.concat(ratingsTotals, total)
-    setRatingsTotals(GR_total)
+    console.log('-----forLoop-----')
+    // let GR_total = ratingsTotals.concat(ratingsTotals, total)
+    // GR_total.push(ratingsTotals)
+    // let arrOfTheNew = ratingsTotals.push(total)
+    ratingsTotals.push(total)
+    // setRatingsTotals(GR_total)
     // console.log()
-    console.log('GR_total - ')
-    console.log(GR_total)
+    // console.log('GR_total - ')
+    // console.log(GR_total)
     console.log()
     console.log('GR_ratingsTotals - ')
     console.log(ratingsTotals)
@@ -129,6 +136,13 @@ export default function App() {
     // console.log(weights[0])
 
   };
+
+  useEffect(() => {
+    console.log()
+    console.log('UE_3_ratingsTotals - ')
+    console.log(ratingsTotals)
+    console.log()
+  }, [ratingsTotals])
 
   const updateRatingsL = async (key) => {
     try {
@@ -198,13 +212,15 @@ export default function App() {
     }
   };
   
-  const updateColleges = async (key) => {
+  const updateColleges = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem(key);
-      const value = JSON.parse(jsonValue);
+      const jsonValue = await AsyncStorage.getItem('collegeList');
+      const pasredJSONValue = JSON.parse(jsonValue);
       if (value!=null){
-        setValueT(value)
-        return value
+        setValueT(pasredJSONValue)
+        
+          // return value
+        
       }
     } catch (e) {
       console.log(e)
@@ -223,10 +239,33 @@ export default function App() {
     }
   };
   
-  React.useEffect(() => {
-    updateColleges('collegeList')
-  },[]);
+
+
+  useEffect(() => {
+    console.log('-----useEffect-----')
+    setViewedWeights()
+    updateColleges()
+    // setColleges(valueT)
+    console.log('-----useEffect-----')
+  }, []);
   
+  useEffect(() => {
+    console.log(),
+    // console.log('UC_pasredJSONValue - '),
+    // console.log(pasredJSONValue),
+    // console.log(),
+    // console.log('UE_2_valueT - '),
+    // console.log(valueT),
+    setColleges(valueT)
+    
+  }, [valueT])
+
+  useEffect(() => {
+    console.log()
+    console.log('UE_2_colleges - ')
+    console.log(colleges)
+    console.log()
+  }, [colleges])
 
   const [factors, setFactors] = useState(initFactors)
   const [colleges, setColleges] = useState(valueT)
@@ -768,7 +807,7 @@ export default function App() {
             }}
 
             onChangeValue = {(value) => {
-              setViewedWeights()
+              // setViewedWeights()
               console.log('------BEFORE------')
               console.log('colleges.length - ')
               console.log(colleges.length)
@@ -1082,6 +1121,7 @@ export default function App() {
                   <View style={{backgroundColor: sectionBackgroundColor, marginBottom: 5, width: deviceWidth-10, marginLeft: 5, borderWidth: 1, borderRadius: 5}}>
                     <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{item.label}</Text>
                     <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{Math.round(ratingsTotals[index]*100)/100}</Text>
+                    {/* <Text style={{fontSize: 24, marginLeft: 3.5, color: colorOfText, shadowOpacity: 0.5}}>{ratingsTotals[index]}</Text> */}
                     <View style={{alignItems: 'flex-end', justifyContent: 'flex-start', marginTop: -24}}>
                       {/* <TouchableOpacity onPress={() => {getRatings(item.ratingKey)}}><Text>LOG RATING</Text></TouchableOpacity> */}
                       <TouchableOpacity onPress={() => {console.log('getRatingsOutput'), console.log(getRating(item.ratingKey))}}><Text style={{marginTop: 10}}>LOG IT</Text></TouchableOpacity>
