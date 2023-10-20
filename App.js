@@ -53,6 +53,30 @@ export default function App() {
     updateRatingsL(ratingKey)
   };
 
+  let reloadRatings = async () => {
+    setRatingsTotals([])
+    for (let i = 1; i < valueT.length; i = i + 1){
+      let rKey = valueT[i].ratingKey
+      console.log('-----rKey-----')
+      console.log('rKey - ')
+      console.log(rKey)
+      console.log('-----rKey-----')
+      getRating(rKey)
+      // let jsonValue = await AsyncStorage.getItem(rKey);
+      // // console.log('URL_jsonvalue - ')
+      // // console.log(jsonValue)
+      // let parsedJSONValue = JSON.parse(jsonValue);
+      // console.log('RR_parsedJSONValue - ')
+      // console.log(parsedJSONValue)
+    }
+    console.log()
+    console.log()
+    console.log('RR_ratingsTotals - ')
+    console.log(ratingsTotals)
+    console.log()
+    console.log()
+  };
+
   let getRating = async (ratingKey) => {
     // getRatings(ratingKey)
     // let rVal = valueT[valueT.findIndex(e => e.value == value)]
@@ -93,7 +117,7 @@ export default function App() {
     // console.log('weights - ')
     // console.log(weights)
     console.log('-----forLoop-----')
-    for (let i = 0; i<ratings.length; i = i + 1){
+    for (let i = 0; i < ratings.length; i = i + 1){
       total = total + ((ratings[i])*(weights[i]/10))
       console.log()
       console.log('i - '+i)
@@ -574,6 +598,7 @@ export default function App() {
   let hamburgerIcon = require('./assets/img/hamburgerMenuIcon.png');
   let plusIcon = require('./assets/img/plusIcon.png');
   let deleteMenuIcon = require('./assets/img/deleteMenu.png')
+  let reloadIcon = require('./assets/img/refresh.png')
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1119,6 +1144,11 @@ export default function App() {
 {/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
 
             <View>{valueMenu=='myColleges' ? (<>
+              {/* <View style={{position: 'absolute', top: -deviceHeightPart*2.15, left: deviceWidth/2+10, backgroundColor: iconColor, borderWidth: 1, marginTop: 0, borderRadius: 150, height: taskbarHeight+10, alignItems: 'center', justifyContent: 'center', width: iconWidth+10}}>
+                <TouchableOpacity onPress={() => {reloadRatings()}} style={{height: taskbarHeight, width: iconWidth}}>
+                  <Image source={reloadIcon} style={{height: taskbarHeight, width: iconWidth}}/>
+                </TouchableOpacity>
+              </View> */}
               <FlatList 
                 data={valueT.slice(1)}
                 renderItem={({ item, index }) => 

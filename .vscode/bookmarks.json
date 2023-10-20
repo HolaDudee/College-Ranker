@@ -4,84 +4,9 @@
 			"path": "App.js",
 			"bookmarks": [
 				{
-					"line": 27,
-					"column": 0,
-					"label": "variables"
-				},
-				{
-					"line": 109,
-					"column": 5,
-					"label": "totalCalculator"
-				},
-				{
-					"line": 145,
-					"column": 0,
-					"label": "ratingsFuncs"
-				},
-				{
-					"line": 192,
-					"column": 2,
-					"label": "initArrs"
-				},
-				{
-					"line": 242,
-					"column": 1,
-					"label": "useEffect"
-				},
-				{
-					"line": 286,
-					"column": 0,
-					"label": "collegeFuncs"
-				},
-				{
-					"line": 345,
-					"column": 0,
-					"label": "weightFuncs"
-				},
-				{
-					"line": 379,
-					"column": 0,
-					"label": "collegeFuncs"
-				},
-				{
-					"line": 574,
-					"column": 0,
-					"label": "photoVariables"
-				},
-				{
-					"line": 726,
-					"column": 0,
-					"label": "collegesDropDown"
-				},
-				{
-					"line": 749,
-					"column": 13,
-					"label": "collegeModal"
-				},
-				{
-					"line": 803,
-					"column": 0,
-					"label": "menuDropDown"
-				},
-				{
-					"line": 851,
-					"column": 0,
-					"label": "devMenu"
-				},
-				{
-					"line": 885,
-					"column": 17,
-					"label": "collegeDeletionModal"
-				},
-				{
-					"line": 1117,
-					"column": 0,
-					"label": "myColleges"
-				},
-				{
-					"line": 1379,
-					"column": 0,
-					"label": "stylesheet"
+					"line": 1157,
+					"column": 71,
+					"label": ""
 				}
 			]
 		}
