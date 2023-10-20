@@ -641,7 +641,7 @@ export default function App() {
     {label: 'Home', value: 'home', icon: () => <Image source={homeWhite} style={{height: 25, width: 25}} />},
     {label: 'My Colleges', value: 'myColleges', icon: () => <Image source={collegeWhite} style={{height: 25, width: 25}} />},
     {label: 'Settings', value: 'settings', icon: () => <Image source={settingsWhite} style={{height: 25, width: 25}} />},
-    {label: 'Dev Menu', value: 'devMenu', icon: () => <Image source={settingsWhite} style={{height: 25, width: 25}} />},
+    // {label: 'Dev Menu', value: 'devMenu', icon: () => <Image source={settingsWhite} style={{height: 25, width: 25}} />},
     
   ]);
   
