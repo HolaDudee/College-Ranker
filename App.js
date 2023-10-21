@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import {} from 'expo';
-<StatusBar style="dark" />
+// import {} from 'expo';
+{/* <StatusBar style="dark" /> */}
 import React, { Component, useState, useEffect } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { AppRegistry, Text, View, StyleSheet, Image, FlatList, SectionList, TextInput, Modal, ImageBackground, TouchableOpacity, TouchableHighlight, Alert, Dimensions, SafeAreaView, ScrollView } from 'react-native';
